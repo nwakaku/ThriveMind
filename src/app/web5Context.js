@@ -12,6 +12,8 @@ export const useWeb5 = () => {
 export const Web5Provider = ({ children }) => {
   const [web5, setWeb5] = useState(null);
   const [myDid, setMyDid] = useState(null);
+  const [recording, setRecording] = useState();
+  const [info, setInfo] = useState();
 
   const createProtocolDefinition = () => {
     const dingerProtocolDefinition = {
@@ -36,7 +38,9 @@ export const Web5Provider = ({ children }) => {
     return dingerProtocolDefinition;
   };
 
-  const queryForProtocol = async (web5) => {
+  const queryForProtocol = async () => {
+    const { web5 } = await Web5.connect();
+
     //Query records with plain text data format
     const response = await web5.dwn.records.query({
       message: {
@@ -45,8 +49,8 @@ export const Web5Provider = ({ children }) => {
         },
       },
     });
-      
-      return response;
+
+    return response;
   };
 
   const installProtocolLocally = async (web5, protocolDefinition) => {
@@ -58,7 +62,7 @@ export const Web5Provider = ({ children }) => {
   };
 
   const configureProtocol = async (web5, did) => {
-      const protocolDefinition = await createProtocolDefinition();
+    const protocolDefinition = await createProtocolDefinition();
 
     const { records: localProtocol, status: localProtocolStatus } =
       await queryForProtocol(web5);
@@ -83,10 +87,11 @@ export const Web5Provider = ({ children }) => {
   const createAcc = () => {
     const initWeb5 = async () => {
       const { web5, did } = await Web5.connect();
-      console.log(web5, did);
+      console.log(web5);
 
       setWeb5(web5);
       localStorage.setItem("myDid", JSON.stringify(did));
+
       // console.log(JSON.stringify(did));
       setMyDid(shortenToSixLetters(did));
 
@@ -99,6 +104,8 @@ export const Web5Provider = ({ children }) => {
 
   // Create a mixed record
   async function createProfile(username, imageFile) {
+    const { web5 } = await Web5.connect();
+
     let base64Image = null;
 
     if (imageFile) {
@@ -124,19 +131,40 @@ export const Web5Provider = ({ children }) => {
       },
     });
     console.log(record);
+    setRecording(record);
     return record;
   }
 
   useEffect(() => {
-    // You can add any cleanup or side effects here if needed
+    const fetchData = async () => {
+      const called = await queryForProtocol();
+      console.log({ called });
 
-      
-    const storedMyDid = localStorage.getItem("myDid");
-    if (storedMyDid) {
-      console.log({ storedMyDid });
-      setMyDid(shortenToSixLetters(storedMyDid));
-    }
-  }, [web5]);
+      const profileInfo = await Promise.all(
+        called.records.map(async (record) => {
+          const data = await record.data.json();
+          return data;
+        })
+      );
+
+      // Filter out the first two elements
+      const filteredprofileInfo = profileInfo.slice(2);
+      const infoObject =
+        filteredprofileInfo.length === 1 ? filteredprofileInfo[0] : null;
+      setInfo(infoObject);
+      // return sentDings;
+
+      const storedMyDid = localStorage.getItem("myDid");
+      if (storedMyDid) {
+        console.log({ storedMyDid });
+        setMyDid(shortenToSixLetters(storedMyDid));
+      }
+    };
+
+    fetchData(); // Call the asynchronous function immediately
+
+    // Additional cleanup logic or dependencies can be added here
+  }, [web5, recording]);
 
   function shortenToSixLetters(inputString) {
     if (typeof inputString !== "string") {
@@ -154,6 +182,7 @@ export const Web5Provider = ({ children }) => {
     configureProtocol,
     createAcc,
     createProfile,
+    info,
   };
 
   return (
