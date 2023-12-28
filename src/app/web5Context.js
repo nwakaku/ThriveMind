@@ -11,9 +11,7 @@ export const useWeb5 = () => {
 
 export const Web5Provider = ({ children }) => {
   const [web5, setWeb5] = useState(null);
-    const [myDid, setMyDid] = useState(null);
-      const [activeRecipient, setActiveRecipient] = useState(null);
-
+  const [myDid, setMyDid] = useState(null);
 
   const createProtocolDefinition = () => {
     const dingerProtocolDefinition = {
@@ -39,13 +37,16 @@ export const Web5Provider = ({ children }) => {
   };
 
   const queryForProtocol = async (web5) => {
-    return await web5.dwn.protocols.query({
+    //Query records with plain text data format
+    const response = await web5.dwn.records.query({
       message: {
         filter: {
-          protocol: "https://blackgirlbytes.dev/dinger-chat-protocol",
+          dataFormat: "application/json",
         },
       },
     });
+      
+      return response;
   };
 
   const installProtocolLocally = async (web5, protocolDefinition) => {
@@ -57,9 +58,9 @@ export const Web5Provider = ({ children }) => {
   };
 
   const configureProtocol = async (web5, did) => {
-    const protocolDefinition = await createProtocolDefinition();
+      const protocolDefinition = await createProtocolDefinition();
 
-    const { protocols: localProtocol, status: localProtocolStatus } =
+    const { records: localProtocol, status: localProtocolStatus } =
       await queryForProtocol(web5);
     console.log({ localProtocol, localProtocolStatus });
     if (localProtocolStatus.code !== 200 || localProtocol.length === 0) {
@@ -84,10 +85,10 @@ export const Web5Provider = ({ children }) => {
       const { web5, did } = await Web5.connect();
       console.log(web5, did);
 
-        setWeb5(web5);
-        localStorage.setItem("myDid", JSON.stringify(did));
-        // console.log(JSON.stringify(did));
-        setMyDid(shortenToSixLetters(did));
+      setWeb5(web5);
+      localStorage.setItem("myDid", JSON.stringify(did));
+      // console.log(JSON.stringify(did));
+      setMyDid(shortenToSixLetters(did));
 
       if (web5 && did) {
         await configureProtocol(web5, did);
@@ -96,21 +97,53 @@ export const Web5Provider = ({ children }) => {
     initWeb5();
   };
 
-  useEffect(() => {
-      // You can add any cleanup or side effects here if needed
+  // Create a mixed record
+  async function createProfile(username, imageFile) {
+    let base64Image = null;
 
-      const storedMyDid = localStorage.getItem("myDid");
-      console.log({storedMyDid});
-      setMyDid(shortenToSixLetters(storedMyDid));
-  }, [web5]);
-    
-    function shortenToSixLetters(inputString) {
-      if (typeof inputString !== "string") {
-        throw new Error("Input must be a string");
-      }
-      return inputString.slice(0, 14) + "...";
+    if (imageFile) {
+      const binaryImage = await imageFile.arrayBuffer();
+      base64Image = btoa(
+        new Uint8Array(binaryImage).reduce(
+          (data, byte) => data + String.fromCharCode(byte),
+          ""
+        )
+      );
     }
 
+    const messageData = {
+      username,
+      image: base64Image,
+    };
+
+    const { record } = await web5.dwn.records.create({
+      data: messageData,
+      message: {
+        schema: "https://blackgirlbytes.dev/ding",
+        dataFormat: "application/json",
+      },
+    });
+    console.log(record);
+    return record;
+  }
+
+  useEffect(() => {
+    // You can add any cleanup or side effects here if needed
+
+      
+    const storedMyDid = localStorage.getItem("myDid");
+    if (storedMyDid) {
+      console.log({ storedMyDid });
+      setMyDid(shortenToSixLetters(storedMyDid));
+    }
+  }, [web5]);
+
+  function shortenToSixLetters(inputString) {
+    if (typeof inputString !== "string") {
+      throw new Error("Input must be a string");
+    }
+    return inputString.slice(0, 14) + "...";
+  }
 
   const contextValue = {
     web5,
@@ -120,6 +153,7 @@ export const Web5Provider = ({ children }) => {
     installProtocolLocally,
     configureProtocol,
     createAcc,
+    createProfile,
   };
 
   return (
