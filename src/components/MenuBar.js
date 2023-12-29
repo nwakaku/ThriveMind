@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 export const MenuBar = () => {
   return (
@@ -12,9 +13,12 @@ export const MenuBar = () => {
         />
         {/* Centered and larger button at the bottom */}
         <div className="absolute bottom-0 left-0 right-0 flex items-center justify-center py-4">
+          <Link href='/journal'>
           <button className="bg-blue-500 text-white py-3 px-6 rounded-lg">
             Journal App
           </button>
+          </Link>
+         
         </div>
       </div>
       {/* Repeat this div for each image */}
@@ -26,9 +30,11 @@ export const MenuBar = () => {
         />
         {/* Centered and larger button at the bottom */}
         <div className="absolute bottom-0 left-0 right-0 flex items-center justify-center py-4">
+        <Link href='/coaching'>
           <button className="bg-blue-500 text-white py-3 px-6 rounded-lg">
-            Coaching & Counseling
+            Coaching and Counselling
           </button>
+          </Link>
         </div>
       </div>
       {/* Repeat this div for each image */}
@@ -40,9 +46,11 @@ export const MenuBar = () => {
         />
         {/* Centered and larger button at the bottom */}
         <div className="absolute bottom-0 left-0 right-0 flex items-center justify-center py-4">
+        <Link href='/goal'>
           <button className="bg-blue-500 text-white py-3 px-6 rounded-lg">
             Goal Tracker
           </button>
+          </Link>
         </div>
       </div>
       {/* Repeat this div for each image */}
@@ -54,9 +62,11 @@ export const MenuBar = () => {
         />
         {/* Centered and larger button at the bottom */}
         <div className="absolute bottom-0 left-0 right-0 flex items-center justify-center py-4">
+        <Link href='#'>
           <button className="bg-blue-500 text-white py-3 px-6 rounded-lg">
             Fitness Tracker
           </button>
+          </Link>
         </div>
       </div>
     </div>
