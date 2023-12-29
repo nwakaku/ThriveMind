@@ -20,17 +20,17 @@ export const Web5Provider = ({ children }) => {
       protocol: "https://blackgirlbytes.dev/dinger-chat-protocol",
       published: true,
       types: {
-        ding: {
+        message: {
           schema: "https://blackgirlbytes.dev/ding",
-          dataFormats: ["application/json"],
+          dataFormat: ["application/json"],
         },
       },
       structure: {
-        ding: {
+        message: {
           $actions: [
             { who: "anyone", can: "write" },
-            { who: "author", of: "ding", can: "read" },
-            { who: "recipient", of: "ding", can: "read" },
+            { who: "author", of: "message", can: "read" },
+            { who: "recipient", of: "message", can: "read" },
           ],
         },
       },
@@ -45,6 +45,7 @@ export const Web5Provider = ({ children }) => {
     const response = await web5.dwn.records.query({
       message: {
         filter: {
+          schema: "https://blackgirlbytes.dev/ding",
           dataFormat: "application/json",
         },
       },
@@ -142,13 +143,14 @@ export const Web5Provider = ({ children }) => {
 
       const profileInfo = await Promise.all(
         called.records.map(async (record) => {
-          const data = await record.data.json();
+            const data = await record.data.json();
+            console.log(data);
           return data;
         })
       );
 
       // Filter out the first two elements
-      const filteredprofileInfo = profileInfo.slice(2);
+      const filteredprofileInfo = profileInfo
       const infoObject =
         filteredprofileInfo.length === 1 ? filteredprofileInfo[0] : null;
       setInfo(infoObject);
