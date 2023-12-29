@@ -49,12 +49,10 @@ export const Profile = ({ myDid, info }) => {
         src={imageUrl}
         alt="Bonnie image"
       />
-      <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
+      <h5 class="mb-2 text-xl font-medium text-gray-900 dark:text-white">
         {info ? info.username : null}
       </h5>
-      <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-        {info ? info.name : null}
-      </h5>
+  
       <span class="text-sm text-gray-200 dark:text-zinc-100 font-semibold bg-blue-600 px-3 py-1 rounded-2xl">{myDid}</span>
 
       <p class="text-gray-200 text-sm font-normal flex gap gap-3 pt-4">
