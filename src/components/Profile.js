@@ -38,7 +38,7 @@ export const Profile = ({ myDid, info }) => {
     <div
     class="w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
     style={{
-      backgroundImage: 'url("https://cdn.dribbble.com/users/4370/screenshots/6759782/screen_shot_2019-07-10_at_2.59.47_pm.png?resize=800x600&vertical=center")',
+      backgroundImage: 'url("https://images.unsplash.com/photo-1639054143259-7127619b32cb?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")',
       backgroundSize: 'cover',  
       backgroundPosition: 'center', 
     }}
@@ -53,7 +53,7 @@ export const Profile = ({ myDid, info }) => {
         {info ? info.username : null}
       </h5>
   
-      <span class="text-sm text-gray-200 dark:text-zinc-100 font-semibold bg-blue-600 px-3 py-1 rounded-2xl">{myDid}</span>
+      <span class="text-sm text-zinc-900 dark:text-zinc-900 font-semibold bg-white px-3 py-1 rounded-2xl">{myDid}</span>
 
       <p class="text-gray-200 text-sm font-normal flex gap gap-3 pt-4">
         <button class="border-2 border-gray-300 rounded-md border-b-4 border-l-4 font-semibold px-2">
