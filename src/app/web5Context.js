@@ -14,14 +14,16 @@ export const Web5Provider = ({ children }) => {
   const [myDid, setMyDid] = useState(null);
   const [recording, setRecording] = useState();
   const [info, setInfo] = useState();
+  const [noteValue, setNoteValue] = useState("");
+  const [journal, setJournal] = useState([]);
 
   const createProtocolDefinition = () => {
-    const dingerProtocolDefinition = {
-      protocol: "https://blackgirlbytes.dev/dinger-chat-protocol",
+    const thrivemindProtocolDefinition = {
+      protocol: "https://thrivemind.dev/thrivemind-chat-protocol",
       published: true,
       types: {
         message: {
-          schema: "https://blackgirlbytes.dev/ding",
+          schema: "https://thrivemind.dev/profile",
           dataFormat: ["application/json"],
         },
       },
@@ -35,8 +37,10 @@ export const Web5Provider = ({ children }) => {
         },
       },
     };
-    return dingerProtocolDefinition;
+    return thrivemindProtocolDefinition;
   };
+
+  console.log(journal);
 
   const queryForProtocol = async () => {
     const { web5 } = await Web5.connect();
@@ -45,13 +49,40 @@ export const Web5Provider = ({ children }) => {
     const response = await web5.dwn.records.query({
       message: {
         filter: {
-          schema: "https://blackgirlbytes.dev/ding",
+          schema: "https://thrivemind.dev/profile",
           dataFormat: "application/json",
         },
       },
     });
 
     return response;
+  };
+
+  const queryForJournal = async () => {
+    try {
+      const { web5 } = await Web5.connect();
+
+      const response = await web5.dwn.records.query({
+        message: {
+          filter: {
+            schema: "https://thrivemind.dev/journal",
+            dataFormat: "application/json",
+          },
+        },
+      });
+
+      const newData = await Promise.all(
+        response.records.map(async (record) => {
+          const data = await record.data.json();
+          console.log(data, "make duo");
+          return data;
+        })
+      );
+
+      setJournal(newData);
+    } catch (error) {
+      console.error("Error fetching and setting journal data:", error);
+    }
   };
 
   const installProtocolLocally = async (web5, protocolDefinition) => {
@@ -103,6 +134,40 @@ export const Web5Provider = ({ children }) => {
     initWeb5();
   };
 
+  const constructMessage = (e) => {
+    const currentDate = new Date().toLocaleDateString();
+    const currentTime = new Date().toLocaleTimeString();
+    const ding = {
+      note: noteValue,
+      timestampWritten: `${currentDate} ${currentTime}`,
+    };
+    return ding;
+  };
+
+  const writeToDwn = async (ding) => {
+    const { web5 } = await Web5.connect();
+    const { record } = await web5.dwn.records.create({
+      data: ding,
+      message: {
+        schema: "https://thrivemind.dev/journal",
+        dataFormat: "application/json",
+      },
+    });
+    return record;
+  };
+
+  // write to journal
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const ding = constructMessage(e);
+    const record = await writeToDwn(ding);
+    //   const { status } = await sendRecord(record);
+
+    console.log(" record status", record);
+    await queryForJournal();
+  };
+
   // Create a mixed record
   async function createProfile(username, imageFile) {
     const { web5 } = await Web5.connect();
@@ -127,7 +192,7 @@ export const Web5Provider = ({ children }) => {
     const { record } = await web5.dwn.records.create({
       data: messageData,
       message: {
-        schema: "https://blackgirlbytes.dev/ding",
+        schema: "https://thrivemind.dev/profile",
         dataFormat: "application/json",
       },
     });
@@ -143,14 +208,17 @@ export const Web5Provider = ({ children }) => {
 
       const profileInfo = await Promise.all(
         called.records.map(async (record) => {
-            const data = await record.data.json();
-            console.log(data);
+          const data = await record.data.json();
+          console.log(data);
           return data;
         })
       );
 
+       await queryForJournal();
+
+
       // Filter out the first two elements
-      const filteredprofileInfo = profileInfo
+      const filteredprofileInfo = profileInfo;
       const infoObject =
         filteredprofileInfo.length === 1 ? filteredprofileInfo[0] : null;
       setInfo(infoObject);
@@ -178,6 +246,8 @@ export const Web5Provider = ({ children }) => {
   const contextValue = {
     web5,
     myDid,
+    setNoteValue,
+    handleSubmit,
     createProtocolDefinition,
     queryForProtocol,
     installProtocolLocally,
@@ -185,6 +255,7 @@ export const Web5Provider = ({ children }) => {
     createAcc,
     createProfile,
     info,
+    journal
   };
 
   return (

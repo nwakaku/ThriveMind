@@ -1,5 +1,6 @@
 import { useRouter } from "next/navigation";  // Update import statement
 import React from "react";
+import Link from "next/link";
 
 export const MenuBar = () => {
     const router = useRouter();
@@ -78,6 +79,7 @@ export const MenuBar = () => {
                     </button>
                 </div>
             </div>
+
         </div>
     );
 };
