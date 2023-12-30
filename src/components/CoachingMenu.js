@@ -30,7 +30,7 @@ export const CoachingMenu = () => {
         <div className="relative group overflow-hidden">
           <img
             className="h-auto max-w-full rounded-lg transition-transform transform-gpu hover:scale-105 hover:rounded-lg"
-            src="https://assets.teenvogue.com/photos/59a4701863dcc0328f9c171a/4:3/w_5972,h_4479,c_limit/GettyImages-668440484.jpg"
+            src="https://images.unsplash.com/photo-1649073586428-e288125d930a?q=80&w=2832&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt=""
           />
           {/* Text on the left top */}
@@ -110,7 +110,7 @@ export const CoachingMenu = () => {
         <div className="relative group overflow-hidden">
           <img
             className="h-auto max-w-full rounded-lg transition-transform transform-gpu hover:scale-105 hover:rounded-lg"
-            src="https://assets.teenvogue.com/photos/59a4701863dcc0328f9c171a/4:3/w_5972,h_4479,c_limit/GettyImages-668440484.jpg"
+            src="https://plus.unsplash.com/premium_photo-1663040458518-bb83a6afa6a4?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt=""
           />
           {/* Text on the left top */}
@@ -150,7 +150,7 @@ export const CoachingMenu = () => {
         <div className="relative group overflow-hidden">
           <img
             className="h-auto max-w-full rounded-lg transition-transform transform-gpu hover:scale-105 hover:rounded-lg"
-            src="https://assets.teenvogue.com/photos/59a4701863dcc0328f9c171a/4:3/w_5972,h_4479,c_limit/GettyImages-668440484.jpg"
+            src="https://images.unsplash.com/photo-1522033467113-b8db23657b96?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDF8fHxlbnwwfHx8fHw%3D"
             alt=""
           />
           {/* Text on the left top */}

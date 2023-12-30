@@ -64,16 +64,14 @@ export const PersonalForm = () => {
         </span>
         <input
           class="w-full bg-transparent p-0 text-sm  text-gray-500 focus:outline-none"
-          id="name"
-          type="text"
-          value={formData.name}
+          type="file"
+          id="profilePic"
           onChange={handleInputChange}
           required
-          placeholder="Full Name"
         />
       </label>
 
-      <label htmlFor="profilePic" className="block pt-4">
+      {/* <label htmlFor="profilePic" className="block pt-4">
         <span class="text-sm font-semibold text-zinc-500">
           Upload profile photo
         </span>
@@ -91,7 +89,7 @@ export const PersonalForm = () => {
       
     "
         />
-      </label>
+      </label> */}
 
       <h1 class="text-1xl font-semibold mt-5">Interests :</h1>
       <p class="text-gray-300 text-sm font-normal flex gap gap-3 pt-2">
