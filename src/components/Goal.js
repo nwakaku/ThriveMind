@@ -1,9 +1,11 @@
 import React from "react";
-import badge1 from '/public/assets/badge1.png'
-import badge2 from '/public/assets/badge2.png'
-import badge3 from '/public/assets/badge3.png'
-import badge4 from '/public/assets/badge4.png'
-import badge5 from '/public/assets/badge5.png'
+import badge1 from "/public/assets/badge1.png";
+import badge2 from "/public/assets/badge2.png";
+import badge3 from "/public/assets/badge3.png";
+import badge4 from "/public/assets/badge4.png";
+import badge5 from "/public/assets/badge5.png";
+import Image from "next/image";
+import { ActiveGoals, CompletedGoals } from "./GoalCard";
 
 export const Goal = () => {
   return (
@@ -36,256 +38,43 @@ export const Goal = () => {
           </div>
 
           {/* Opened goals */}
-          <div class="px-4">
-            <div class="my-3 flex items-center justify-between mt-5">
-              <h2 class="text-lg font-semibold text-gray-900">Active Goals</h2>
-            </div>
-            <div class="grid sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3">
-              <div class="mb-6 rounded-lg bg-white p-6">
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center">
-                    <div>
-                      <h3 class="text-base font-semibold text-gray-900">
-                        Physio-therapy session
-                      </h3>
-                      <span class="block text-xs font-normal text-gray-500">
-                        Opened: 1-01-2024
-                      </span>
-                    </div>
-                  </div>
-                  <p class="text-sm font-medium text-indigo-500">
-                    <span class="mr-0.5">+</span>Edit
-                  </p>
-                </div>
-                <p class="my-6 text-sm font-normal text-gray-500">
-                  I'm going for three sessions with miss Nitta for therapy ...
-                </p>
-                <div class=" flex items-center justify-between text-sm font-semibold text-gray-900">
-                  <div class="flex">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      class="mr-2 h-5 w-5 text-base text-gray-500"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M6 6.878V6a2.25 2.25 0 012.25-2.25h7.5A2.25 2.25 0 0118 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 004.5 9v.878m13.5-3A2.25 2.25 0 0119.5 9v.878m0 0a2.246 2.246 0 00-.75-.128H5.25c-.263 0-.515.045-.75.128m15 0A2.25 2.25 0 0121 12v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6c0-.98.626-1.813 1.5-2.122"
-                      />
-                    </svg>
-                    <span class="mr-1">5</span> Task
-                  </div>
-                  <div class="flex flex-col ">
-                    <p class="text-gray-300 mb-2 text-sm">4/6 task completed</p>
-                    <div class="w-full h-2 bg-blue-200 rounded-full">
-                      <div class="w-2/3 h-full text-center text-xs text-white bg-blue-600 rounded-full"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="mb-6 rounded-lg bg-white p-6">
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center">
-                    <div>
-                      <h3 class="text-base font-semibold text-gray-900">
-                        Physio-therapy session
-                      </h3>
-                      <span class="block text-xs font-normal text-gray-500">
-                        Opened: 1-01-2024
-                      </span>
-                    </div>
-                  </div>
-                  <p class="text-sm font-medium text-indigo-500">
-                    <span class="mr-0.5">+</span>Edit
-                  </p>
-                </div>
-                <p class="my-6 text-sm font-normal text-gray-500">
-                  I'm going for three sessions with miss Nitta for therapy ...
-                </p>
-                <div class=" flex items-center justify-between text-sm font-semibold text-gray-900">
-                  <div class="flex">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      class="mr-2 h-5 w-5 text-base text-gray-500"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M6 6.878V6a2.25 2.25 0 012.25-2.25h7.5A2.25 2.25 0 0118 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 004.5 9v.878m13.5-3A2.25 2.25 0 0119.5 9v.878m0 0a2.246 2.246 0 00-.75-.128H5.25c-.263 0-.515.045-.75.128m15 0A2.25 2.25 0 0121 12v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6c0-.98.626-1.813 1.5-2.122"
-                      />
-                    </svg>
-                    <span class="mr-1">5</span> Task
-                  </div>
-                  <div class="flex flex-col ">
-                    <p class="text-gray-300 mb-2 text-sm">4/6 task completed</p>
-                    <div class="w-full h-2 bg-blue-200 rounded-full">
-                      <div class="w-2/3 h-full text-center text-xs text-white bg-blue-600 rounded-full"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+         <ActiveGoals/>
           {/* Completed goals */}
-          <div class="px-4">
-            <div class="my-3">
-              <h2 class="text-lg font-semibold text-gray-900">
-                Completed Goals
-              </h2>
-            </div>
-            <div class="grid sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3">
-              <div class="mb-6 rounded-lg bg-white p-6">
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center">
-                    <div>
-                      <h3 class="text-base font-semibold text-gray-900">
-                        Physio-therapy session
-                      </h3>
-                      <span class="block text-xs font-normal text-gray-500">
-                        Closed: 1-01-2024
-                      </span>
-                    </div>
-                  </div>
-                  <p class="text-sm font-medium text-indigo-500">
-                    <span class="mr-0.5">+</span>Edit
-                  </p>
-                </div>
-                <p class="my-6 text-sm font-normal text-gray-500">
-                  I'm going for three sessions with miss Nitta for therapy ...
-                </p>
-                <div class=" flex items-center justify-between text-sm font-semibold text-gray-900">
-                  <div class="flex">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      class="mr-2 h-5 w-5 text-base text-gray-500"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M6 6.878V6a2.25 2.25 0 012.25-2.25h7.5A2.25 2.25 0 0118 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 004.5 9v.878m13.5-3A2.25 2.25 0 0119.5 9v.878m0 0a2.246 2.246 0 00-.75-.128H5.25c-.263 0-.515.045-.75.128m15 0A2.25 2.25 0 0121 12v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6c0-.98.626-1.813 1.5-2.122"
-                      />
-                    </svg>
-                    <span class="mr-1">5</span> Task
-                  </div>
-                  <div class="flex flex-col ">
-                    <p class="text-gray-300 mb-2 text-sm">4/6 task completed</p>
-                    <div class="w-full h-2 bg-blue-200 rounded-full">
-                      <div class="w-2/3 h-full text-center text-xs text-white bg-blue-600 rounded-full"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="mb-6 rounded-lg bg-white p-6">
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center">
-                    <div>
-                      <h3 class="text-base font-semibold text-gray-900">
-                        Physio-therapy session
-                      </h3>
-                      <span class="block text-xs font-normal text-gray-500">
-                        Closed: 1-01-2024
-                      </span>
-                    </div>
-                  </div>
-                  <p class="text-sm font-medium text-indigo-500">
-                    <span class="mr-0.5">+</span>Edit
-                  </p>
-                </div>
-                <p class="my-6 text-sm font-normal text-gray-500">
-                  I'm going for three sessions with miss Nitta for therapy ...
-                </p>
-                <div class=" flex items-center justify-between text-sm font-semibold text-gray-900">
-                  <div class="flex">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      class="mr-2 h-5 w-5 text-base text-gray-500"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M6 6.878V6a2.25 2.25 0 012.25-2.25h7.5A2.25 2.25 0 0118 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 004.5 9v.878m13.5-3A2.25 2.25 0 0119.5 9v.878m0 0a2.246 2.246 0 00-.75-.128H5.25c-.263 0-.515.045-.75.128m15 0A2.25 2.25 0 0121 12v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6c0-.98.626-1.813 1.5-2.122"
-                      />
-                    </svg>
-                    <span class="mr-1">5</span> Task
-                  </div>
-                  <div class="flex flex-col ">
-                    <p class="text-gray-300 mb-2 text-sm">4/6 task completed</p>
-                    <div class="w-full h-2 bg-blue-200 rounded-full">
-                      <div class="w-2/3 h-full text-center text-xs text-white bg-blue-600 rounded-full"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="mb-6 rounded-lg bg-white p-6">
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center">
-                    <div>
-                      <h3 class="text-base font-semibold text-gray-900">
-                        Physio-therapy session
-                      </h3>
-                      <span class="block text-xs font-normal text-gray-500">
-                        Closed: 1-01-2024
-                      </span>
-                    </div>
-                  </div>
-                  <p class="text-sm font-medium text-indigo-500">
-                    <span class="mr-0.5">+</span>Edit
-                  </p>
-                </div>
-                <p class="my-6 text-sm font-normal text-gray-500">
-                  I'm going for three sessions with miss Nitta for therapy ...
-                </p>
-                <div class=" flex items-center justify-between text-sm font-semibold text-gray-900">
-                  <div class="flex">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      class="mr-2 h-5 w-5 text-base text-gray-500"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M6 6.878V6a2.25 2.25 0 012.25-2.25h7.5A2.25 2.25 0 0118 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 004.5 9v.878m13.5-3A2.25 2.25 0 0119.5 9v.878m0 0a2.246 2.246 0 00-.75-.128H5.25c-.263 0-.515.045-.75.128m15 0A2.25 2.25 0 0121 12v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6c0-.98.626-1.813 1.5-2.122"
-                      />
-                    </svg>
-                    <span class="mr-1">5</span> Task
-                  </div>
-                  <div class="flex flex-col ">
-                    <p class="text-gray-300 mb-2 text-sm">4/6 task completed</p>
-                    <div class="w-full h-2 bg-blue-200 rounded-full">
-                      <div class="w-2/3 h-full text-center text-xs text-white bg-blue-600 rounded-full"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <CompletedGoals/>
           {/* Badges earned */}
           <div class="px-4">
             <div class="my-5">
               <h2 class="text-lg font-semibold text-gray-900">Earned Badges</h2>
             </div>
             <div className="flex space-x-6 justify-around">
-              <div>
-                
+             
+              <div className="flex flex-col items-center">
+                <p className="font-semibold text-gray-900">Cadet x1</p>
+                <Image src={badge3} className="w-20 h-20 bg-zinc-900 mb-3 mt-1 rounded-full p-3" />
+                <p className="text-sm text-gray-600 max-w-30">
+                  Earned for completing first goal
+                </p>
+              </div>
+              <div className="flex flex-col items-center">
+                <p className="font-semibold text-gray-900">Rosian x0</p>
+                <Image src={badge1} className="w-20 h-20 bg-zinc-900 mb-3 mt-1 rounded-full p-3" />
+                <p className="text-sm text-gray-600 max-w-30">
+                  Earned for completing 15 goals
+                </p>
+              </div>
+              <div className="flex flex-col items-center">
+                <p className="font-semibold text-gray-900">Veteran x0</p>
+                <Image src={badge5} className="w-20 h-20 bg-zinc-900 mb-3 mt-1 rounded-full p-3" />
+                <p className="text-sm text-gray-600 max-w-30">
+                  Earned for completing 30 goals
+                </p>
+              </div>
+              <div className="flex flex-col items-center">
+                <p className="font-semibold text-gray-900">Sensei x0</p>
+                <Image src={badge2} className="w-20 h-20 bg-zinc-900 mb-3 mt-1 rounded-full p-3" />
+                <p className="text-sm text-gray-600 max-w-30">
+                  Earned for completing 50+ goals
+                </p>
               </div>
             </div>
           </div>
