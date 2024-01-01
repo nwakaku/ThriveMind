@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Journal } from "./Journal";
 import { useWeb5 } from "@/app/web5Context";
 
 export const Sidebar = () => {
   const { myDid, noteValue, journal } = useWeb5();
+  const [text, setText] = useState();
+
+  console.log(text);
 
   return (
     <>
@@ -46,7 +49,9 @@ export const Sidebar = () => {
                     viewBox="0 0 20 20">
                     {/* Your SVG path here */}
                   </svg>
-                  <div className="flex flex-col">
+                  <div
+                    onClick={() => setText(item.note)}
+                    className="flex flex-col">
                     <span className="ml-3 mt-2 whitespace-nowrap">
                       {item.note.slice(0, 12)}
                     </span>
@@ -58,7 +63,7 @@ export const Sidebar = () => {
           </ul>
         </div>
       </aside>
-      <Journal />
+      <Journal text={ text} />
     </>
   );
 };

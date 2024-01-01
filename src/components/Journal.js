@@ -1,7 +1,7 @@
 import { useWeb5 } from "@/app/web5Context";
 import React, { useState } from "react";
 
-export const Journal = () => {
+export const Journal = ({text}) => {
 
   const { myDid, createAcc, info, setNoteValue, noteValue, handleSubmit } = useWeb5();
 
@@ -186,7 +186,7 @@ export const Journal = () => {
               Publish post
             </label>
             <textarea
-              value={noteValue}
+              value={text ? text :noteValue}
               onChange={handleChange}
               id="editor"
               rows="16"
@@ -197,7 +197,8 @@ export const Journal = () => {
           </div>
         </div>
         <div className="flex  justify-between">
-          <button onClick={(e) => handleSubmit(e)}
+          <button
+            onClick={(e) => handleSubmit(e)}
             type="submit"
             class="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
             Publish note
