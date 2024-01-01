@@ -1,5 +1,5 @@
 import React from 'react';
-import backgroundImage from '/public/assets/profile.png';
+
 
 export const Profile = ({ myDid, info }) => {
   function getImageUrl(base64Image) {

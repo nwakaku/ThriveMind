@@ -7,18 +7,17 @@ export const PersonalForm = () => {
   // State to manage form data
   const [formData, setFormData] = useState({
     userName: "",
-    name: "",
-    profilePic: null, // Assuming you want to store the file in state
+    profilePic: null,
   });
 
-  // Function to handle form submission
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Perform any necessary validation or additional actions here
-    createProfile(formData.userName, formData.name, formData.profilePic);
-    // Log the form data (replace this with your desired logic)
-    console.log("Form Data:", formData);
+    createProfile(formData.userName, formData.profilePic);
+
+    setFormSubmitted(true);
   };
 
   // Function to handle input changes
@@ -30,7 +29,13 @@ export const PersonalForm = () => {
       ...prevData,
       [id]: type === "file" ? files[0] : value,
     }));
+
+    setFormSubmitted(false);
   };
+
+  if (formSubmitted) {
+    return null;
+  }
 
   return (
     <form className="w-full mx-auto" onSubmit={handleSubmit}>
@@ -60,7 +65,7 @@ export const PersonalForm = () => {
         htmlFor="name"
       >
         <span class="text-md font-semibold text-zinc-300" htmlFor="name">
-         Your name
+          Your name
         </span>
         <input
           class="w-full bg-transparent p-0 text-sm  text-gray-500 focus:outline-none"
@@ -118,7 +123,7 @@ export const PersonalForm = () => {
 
       <button
         type="submit"
-        class="mt-5 border-2 px-5 py-2 rounded-lg border-gray-300 border-b-4 font-white translate-y-2 border-l-4 hover:border-gray-500"
+        class="mt-5 border-2 px-5 py-2 rounded-lg border-blue-400 border-b-4 font-white translate-y-2 border-l-4 hover:border-blue-600"
       >
         Submit
       </button>
