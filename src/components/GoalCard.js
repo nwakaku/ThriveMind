@@ -42,7 +42,7 @@ const goalsData = [
     title: "Gym workout",
     status: "Active",
     openedDate: "2-01-2024",
-    content: "Working out at the gym to stay fit and healthy...",
+    content: "Working out at the gym to stay fit and healthy and bubbling rata...",
     tasks: {
       total: 6,
       completed: 2,
@@ -253,8 +253,8 @@ const EditDialog = ({
     }));
   };
 
-   // Function to delete a todo
-   const handleDeleteTodo = (todoId) => {
+  // Function to delete a todo
+  const handleDeleteTodo = (todoId) => {
     const updatedTodos = todos.filter((todo) => todo.id !== todoId);
     setEditedGoal((prevGoal) => ({
       ...prevGoal,
@@ -323,7 +323,7 @@ const EditDialog = ({
                   onChange={(e) =>
                     handleTodoChange(todo.id, "completed", e.target.checked)
                   }
-                  className='w-6 h-6'
+                  className="w-5 h-5"
                 />
                 <div className="relative w-full">
                   <Input
@@ -332,15 +332,14 @@ const EditDialog = ({
                       handleTodoChange(todo.id, "description", e.target.value)
                     }
                     placeholder="Todo description"
-                    className='focus:outline-none focus:ring-0'
-                    
+                    className="focus:outline-none focus:ring-0"
                   />
                   <button
                     type="button"
                     onClick={() => handleDeleteTodo(todo.id)}
                     className="absolute right-3 top-1/2 transform -translate-y-1/2 "
                   >
-                    <FaTrashAlt className="w-3 h-3 text-gray-800"/>
+                    <FaTrashAlt className="w-3 h-3 text-gray-800" />
                   </button>
                 </div>
               </div>
@@ -348,18 +347,43 @@ const EditDialog = ({
           </div>
         </div>
         <DialogFooter>
-          <Button className='mx-auto bg-indigo-500 hover:bg-indigo-700' onClick={handleSaveChanges}>Save changes</Button>
+          <Button
+            className="mx-auto bg-indigo-500 hover:bg-indigo-700"
+            onClick={handleSaveChanges}
+          >
+            Save changes
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
   );
 };
 
-const GoalsSection = ({ goals, title }) => {
+const GoalsSection = ({ goals, title, create }) => {
+  const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
+
+  const handleCreateClick = () => {
+    setIsCreateDialogOpen(true);
+  };
+
+  const handleSaveNewGoal = (newGoal) => {
+    // Add logic to save the new goal to your data source
+    // For now, let's just log the new goal
+    console.log("New Goal:", newGoal);
+  };
+
   return (
     <div className="px-4">
-      <div className="my-3">
+      <div className="my-3 mx-2 flex justify-between">
         <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
+        {create && (
+          <CreateDialog
+            isOpen={isCreateDialogOpen}
+            setIsOpen={setIsCreateDialogOpen}
+            handleSaveChanges={handleSaveNewGoal}
+            handleCreateClick={handleCreateClick}
+          />
+        )}
       </div>
       <div className="grid sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3">
         {goals.map((goal, index) => (
@@ -376,6 +400,7 @@ export const ActiveGoals = () => {
       <GoalsSection
         goals={goalsData.filter((goal) => goal.status === "Active")}
         title="Active Goals"
+        create="Create New"
       />
     </div>
   );
@@ -389,5 +414,152 @@ export const CompletedGoals = () => {
         title="Completed Goals"
       />
     </div>
+  );
+};
+
+const CreateDialog = ({
+  isOpen,
+  setIsOpen,
+  handleSaveChanges,
+  handleCreateClick,
+}) => {
+  const [editedGoal, setEditedGoal] = useState({
+    title: "",
+    content: "",
+    todos: [],
+  });
+
+  // Function to add a new todo
+  const handleAddTodo = () => {
+    const newTodo = {
+      id: Date.now(),
+      description: "",
+      completed: false,
+    };
+
+    setEditedGoal((prevGoal) => ({
+      ...prevGoal,
+      todos: [...prevGoal.todos, newTodo],
+    }));
+  };
+
+  // Function to update todo details
+  const handleTodoChange = (todoId, field, value) => {
+    const updatedTodos = editedGoal.todos.map((todo) =>
+      todo.id === todoId ? { ...todo, [field]: value } : todo
+    );
+    setEditedGoal((prevGoal) => ({
+      ...prevGoal,
+      todos: updatedTodos,
+    }));
+  };
+
+  // Function to delete a todo
+  const handleDeleteTodo = (todoId) => {
+    const updatedTodos = editedGoal.todos.filter((todo) => todo.id !== todoId);
+    setEditedGoal((prevGoal) => ({
+      ...prevGoal,
+      todos: updatedTodos,
+    }));
+  };
+
+  return (
+    <Dialog isOpen={isOpen} onDismiss={() => setIsOpen(false)}>
+      <DialogTrigger asChild>
+        <Button
+          className="bg-indigo-500 hover:bg-indigo-700"
+          onClick={handleCreateClick}
+        >
+          Create New
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px] text-gray-700">
+        <DialogHeader>
+          <DialogTitle>Create new goal</DialogTitle>
+        </DialogHeader>
+        <div className="flex flex-col justify-around">
+          <div className="flex flex-col items-start">
+            <Label htmlFor="title" className="text-right my-3 font-semibold">
+              Title
+            </Label>
+            <Input
+              id="title"
+              value={editedGoal.title}
+              onChange={(e) =>
+                setEditedGoal({ ...editedGoal, title: e.target.value })
+              }
+              className="col-span-5 focus:outline-none focus:ring-0"
+            />
+          </div>
+          <div className="items-center gap-4 mt-2">
+            <Label htmlFor="content" className="text-right my-3 font-semibold">
+              Info
+            </Label>
+            <Input
+              id="content"
+              value={editedGoal.content}
+              onChange={(e) =>
+                setEditedGoal({ ...editedGoal, content: e.target.value })
+              }
+              className="col-span-5 focus:outline-none focus:ring-0"
+            />
+          </div>
+          <div>
+            <div className="flex justify-between mt-4 mr-2 mb-1">
+              <Label className="font-semibold">Todos</Label>
+              <button
+                type="button"
+                onClick={handleAddTodo}
+                className="text-sm font-semibold text-indigo-500"
+              >
+                + Add
+              </button>
+            </div>
+
+            {editedGoal.todos.map((todo) => (
+              <div key={todo.id} className="flex items-center gap-4 my-2">
+                <Checkbox
+                  id={`todo-${todo.id}`}
+                  checked={todo.completed}
+                  onChange={(e) =>
+                    handleTodoChange(todo.id, "completed", e.target.checked)
+                  }
+                  className="w-5 h-5"
+                />
+                <div className="relative w-full">
+                  <Input
+                    value={todo.description}
+                    onChange={(e) =>
+                      handleTodoChange(todo.id, "description", e.target.value)
+                    }
+                    placeholder="Todo description"
+                    className="focus:outline-none focus:ring-0"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => handleDeleteTodo(todo.id)}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 "
+                  >
+                    <FaTrashAlt className="w-3 h-3 text-gray-800" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <DialogFooter>
+          <Button
+            className="mx-auto bg-indigo-500 hover:bg-indigo-700"
+            onClick={() => {
+              // Add the logic for the create button click here
+              handleSaveChanges(editedGoal);
+              setIsOpen(false);
+            }}
+          >
+            Save changes
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 };
