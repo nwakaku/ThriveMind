@@ -6,6 +6,7 @@ import { FindDoctors } from "./FindDoctors";
 import { AIAnalyser } from "./AIAnalyser";
 import { PostVisit } from "./PostVisit";
 import badge1 from "/public/assets/badge1.png";
+import search1 from "/public/assets/search1.png";
 
 export const Health = () => {
   const [activeComponent, setActiveComponent] = useState("records");
@@ -29,7 +30,7 @@ export const Health = () => {
     },
     findDoctors: {
       title: "Find Doctors and Centres",
-      image: badge1, // Replace with the correct image for Find Doctors
+      image: search1, // Replace with the correct image for Find Doctors
       buttonText: "Search",
     },
   };
