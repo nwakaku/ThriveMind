@@ -2,8 +2,10 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
 import { Web5 } from "@web5/api";
+import axios from "axios";
 
 const Web5Context = createContext();
+
 
 export const useWeb5 = () => {
   return useContext(Web5Context);
@@ -16,6 +18,7 @@ export const Web5Provider = ({ children }) => {
   const [info, setInfo] = useState();
   const [noteValue, setNoteValue] = useState("");
   const [journal, setJournal] = useState([]);
+  const [category, setCategory] = useState()
 
   const createProtocolDefinition = () => {
     const thrivemindProtocolDefinition = {
@@ -243,6 +246,63 @@ export const Web5Provider = ({ children }) => {
     return inputString.slice(0, 14) + "...";
   }
 
+  // this where the AI function is written
+
+
+  async function AI(userInputs, category) {
+    const apiKey = "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";
+    if (!apiKey) {
+      throw new Error("API key not found in environment variables.");
+    }
+
+    const endpoint = "https://api.openai.com/v1/chat/completions";
+
+    // Prepare the request payload
+    const payload = {
+      model: "gpt-3.5-turbo-1106",
+      response_format: { type: "json_object" },
+      messages: [
+        {
+          role: "system",
+          content: `You are a ${category} counselor assistant, you offer advices to people on ${category}, designed to output JSON.`,
+        },
+        { role: "user", content: "Hello my name is patient" },
+        {
+          role: "assistant",
+          content: "Okay Welcome patient, what's your question?",
+        },
+        {
+          role: "user",
+          content: `mood: ${userInputs[0].user} and my question: ${userInputs[1].user} and lastly: ${userInputs[2].user} ?`,
+        },
+      ],
+      max_tokens: 200,
+      temperature: 0.7,
+      n: 1,
+    };
+
+    // Make the API request to ChatGPT API
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify(payload),
+      });
+
+      // Parse the response
+      const data = await response.json();
+      console.log(data);
+      const generatedSentence = data.choices[0].message.content;
+      return generatedSentence;
+    } catch (error) {
+      console.error("Error:", error);
+      throw error;
+    }
+  }
+
   const contextValue = {
     web5,
     myDid,
@@ -255,7 +315,10 @@ export const Web5Provider = ({ children }) => {
     createAcc,
     createProfile,
     info,
-    journal
+    journal,
+    AI,
+    setCategory,
+    category,
   };
 
   return (

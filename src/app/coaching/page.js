@@ -10,7 +10,7 @@ export default function Home() {
   const { myDid, createAcc, info } = useWeb5();
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-center justify-between px-32 pt-24 pb-16">
       <Navbar myDid={myDid} createAcc={createAcc} />
       <CoachingMenu/>
     </main>

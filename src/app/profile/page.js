@@ -11,11 +11,10 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <Navbar myDid={myDid} createAcc={createAcc} />
-      <div className="flex flex-col w-2/4 ">
+      <div className="flex flex-col w-2/4">
         <Profile myDid={myDid} info={info} />
-        <PersonalForm />
+        {info ? null : <PersonalForm />}
       </div>
     </main>
   );
 }
-
