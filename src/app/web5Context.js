@@ -6,7 +6,6 @@ import axios from "axios";
 
 const Web5Context = createContext();
 
-
 export const useWeb5 = () => {
   return useContext(Web5Context);
 };
@@ -18,7 +17,31 @@ export const Web5Provider = ({ children }) => {
   const [info, setInfo] = useState();
   const [noteValue, setNoteValue] = useState("");
   const [journal, setJournal] = useState([]);
-  const [category, setCategory] = useState()
+  const [category, setCategory] = useState();
+
+  //Goal
+  const [goaltodo, setGoaltodo] = useState([
+    {
+      id: 11,
+      description: "New Task 1",
+      completed: false,
+    },
+    {
+      id: 12,
+      description: "New Task 2",
+      completed: false,
+    },
+  ]);
+  const [goalstruct, setGoalstruct] = useState({
+    title: "",
+    content: "",
+    status: true,
+    task: {
+      total: 2,
+      completed: 0
+    }
+
+  })
 
   const createProtocolDefinition = () => {
     const thrivemindProtocolDefinition = {
@@ -171,7 +194,26 @@ export const Web5Provider = ({ children }) => {
     await queryForJournal();
   };
 
-  // Create a mixed record
+  // Here we handle the Goal section
+  const constructGoalsData = () => {
+    const currentDate = new Date().toLocaleDateString();
+
+    const goalData = {
+      title: "New Goal 1",
+      status: "Active",
+      openedDate: currentDate,
+      content: "Description for the new goal 1...",
+      tasks: {
+        total: 3,
+        completed: 0,
+      },
+      todos: goaltodo,
+    };
+
+    return goalData;
+  };
+
+  // Create a Profile record
   async function createProfile(username, imageFile) {
     const { web5 } = await Web5.connect();
 
@@ -217,8 +259,7 @@ export const Web5Provider = ({ children }) => {
         })
       );
 
-       await queryForJournal();
-
+      await queryForJournal();
 
       // Filter out the first two elements
       const filteredprofileInfo = profileInfo;
@@ -247,7 +288,6 @@ export const Web5Provider = ({ children }) => {
   }
 
   // this where the AI function is written
-
 
   async function AI(userInputs, category) {
     const apiKey = "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";

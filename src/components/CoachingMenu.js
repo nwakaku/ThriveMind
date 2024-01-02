@@ -7,7 +7,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ToolTip";
+} from "@/components/ui/ToolTip";
 import StarRating from "./StarRating";
 import { FaQuestionCircle } from "react-icons/fa";
 import { useWeb5 } from "@/app/web5Context";
