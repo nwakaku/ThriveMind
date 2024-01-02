@@ -1,15 +1,14 @@
-"use client"
+"use client";
 
-import { Jumb } from '@/components/Jumb'
-import { Navbar } from '@/components/Navbar'
-import { useWeb5 } from './web5Context';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
-import { AIAnalyser } from '@/components/AIAnalyser';
-
+import { Jumb } from "@/components/Jumb";
+import { Navbar } from "@/components/Navbar";
+import { useWeb5 } from "./web5Context";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { AIAnalyser } from "@/components/AIAnalyser";
+import { FindDoctors } from "@/components/FindDoctors";
 
 export default function Home() {
-
   const { myDid, createAcc } = useWeb5();
 
   const router = useRouter();
@@ -28,7 +27,6 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <Navbar myDid={myDid} createAcc={createAcc} />
       <Jumb/>
-      {/* <AIAnalyser/> */}
     </main>
-  )
+  );
 }

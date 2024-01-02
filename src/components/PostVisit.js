@@ -14,7 +14,7 @@ export const PostVisit = () => {
     <div className="h-full w-full flex flex-col p-6">
       {/* Header top */}
       <div className="flex justify-between space-x-4">
-        <p className="font-semibold text-xl">Doctor Visits</p>
+        <p className="font-semibold text-lg">Doctor Visits</p>
         <div className="flex ">
           {/* <button className="text-indigo-500 flex items-center space-x-2 mr-6 ">
             <FaArrowUp />
@@ -29,7 +29,7 @@ export const PostVisit = () => {
       </div>
 
       {/* Main body */}
-      <div className="flex flex-col  mt-6">
+      <div className="flex flex-col  mt-2">
         {/* Options available */}
         <div className="flex justify-between mt-8 mb-5 items-center">
           <div className="flex space-x-6 items-center">
