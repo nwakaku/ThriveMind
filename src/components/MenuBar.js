@@ -62,7 +62,7 @@ export const MenuBar = () => {
         />
         {/* Centered and larger button at the bottom */}
         <div className="absolute bottom-0 left-0 right-0 flex items-center justify-center py-4">
-        <Link href='#'>
+        <Link href='/health'>
           <button className="bg-blue-500 text-white py-3 px-6 rounded-lg">
             Health Pro
           </button>

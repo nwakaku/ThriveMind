@@ -5,7 +5,7 @@ import { Navbar } from '@/components/Navbar'
 import { useWeb5 } from './web5Context';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { Records } from '@/components/Records';
+import { AIAnalyser } from '@/components/AIAnalyser';
 
 
 export default function Home() {
@@ -28,7 +28,7 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <Navbar myDid={myDid} createAcc={createAcc} />
       {/* <Jumb/> */}
-      <Records/>
+      <AIAnalyser/>
     </main>
   )
 }
