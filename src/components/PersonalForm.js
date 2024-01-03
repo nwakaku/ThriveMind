@@ -121,7 +121,7 @@ export const PersonalForm = () => {
 
       <button
         type="submit"
-        class="mt-5 border-2 px-5 py-2 rounded-lg border-blue-400 border-b-4 font-white translate-y-2 border-l-4 hover:border-blue-600">
+        class="mt-5 border-2 px-5 py-2 rounded-lg border-indigo-400 border-b-4 font-white translate-y-2 border-l-4 hover:border-indigo-500">
         Submit
       </button>
     </form>

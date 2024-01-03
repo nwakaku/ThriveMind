@@ -3,10 +3,15 @@ import {
   FaArrowUp,
   FaGreaterThan,
   FaSort,
+  FaSortDown,
   FaStoreAltSlash,
 } from "react-icons/fa";
-import badge2 from "/public/assets/badge2.png";
-import badge4 from "/public/assets/badge4.png";
+import result from "/public/assets/result.png";
+import allergies from "/public/assets/allergies.png";
+import vital from "/public/assets/vitals.png";
+import conditions from "/public/assets/condition.png";
+import immmunization from "/public/assets/immunization.png";
+
 import Image from "next/image";
 
 export const Records = () => {
@@ -17,12 +22,11 @@ export const Records = () => {
         <p className="font-semibold text-lg">Clinical data</p>
         <div className="flex ">
           <button className="text-indigo-500 flex items-center space-x-2 mr-6 ">
-            <FaArrowUp />
             <p className=" text-sm ">Export Medical Records</p>
           </button>
 
           <button className="text-indigo-500 flex items-center space-x-2">
-            <FaStoreAltSlash />
+            <FaSortDown className="mb-2" />
             <p className=" text-sm ">Sort</p>
           </button>
         </div>
@@ -31,9 +35,9 @@ export const Records = () => {
       {/* Main body */}
       <div className="flex flex-col  mt-6">
         {/* Options available */}
-        <div className="flex justify-between my-5 items-center ">
+        <div className="flex justify-between my-6 items-center ">
           <div className="flex space-x-4 items-center">
-            <Image src={badge2} className="w-10 h-10" />
+            <Image src={allergies} className="w-10 h-10" />
             <div className="flex flex-col gap-1">
               <p className="font-semibold text-sm">Allergies</p>
               <p className="text-xs">3 diagnosed allergies </p>
@@ -41,16 +45,16 @@ export const Records = () => {
           </div>
           <div>
             <button className="text-indigo-500 flex items-center space-x-2 ">
-              <p className=" text-sm mr-4 ">Allergies</p>
-              <FaGreaterThan />
+              <p className=" text-sm mr-3 ">Allergies</p>
+              <FaGreaterThan/>
             </button>
           </div>
         </div>
         <div className="border-b border-gray-400"></div>
         {/* Options available */}
-        <div className="flex justify-between my-5 items-center">
+        <div className="flex justify-between my-6 items-center">
           <div className="flex space-x-4 items-center">
-            <Image src={badge4} className="w-10 h-10" />
+            <Image src={vital} className="w-10 h-10" />
             <div className="flex flex-col gap-1">
               <p className="font-semibold text-sm">Clinical vitals</p>
               <p className="text-xs">24 vital records </p>
@@ -58,16 +62,16 @@ export const Records = () => {
           </div>
           <div>
             <button className="text-indigo-500 flex items-center space-x-2 ">
-              <p className=" text-sm mr-4 ">Clinical vitals</p>
+              <p className=" text-sm mr-3 ">Clinical vitals</p>
               <FaGreaterThan />
             </button>
           </div>
         </div>
         <div className="border-b border-gray-400"></div>
         {/* Options available */}
-        <div className="flex justify-between my-5 items-center">
+        <div className="flex justify-between my-6 items-center">
           <div className="flex space-x-4 items-center">
-            <Image src={badge2} className="w-10 h-10" />
+            <Image src={conditions} className="w-10 h-10" />
             <div className="flex flex-col gap-1">
               <p className="font-semibold text-sm">Conditions</p>
               <p className="text-xs">3 known conditions </p>
@@ -75,16 +79,16 @@ export const Records = () => {
           </div>
           <div>
             <button className="text-indigo-500 flex items-center space-x-2 ">
-              <p className=" text-sm mr-4 ">Conditions</p>
+              <p className=" text-sm mr-3 ">Conditions</p>
               <FaGreaterThan />
             </button>
           </div>
         </div>
         <div className="border-b border-gray-400"></div>
         {/* Options available */}
-        <div className="flex justify-between my-5 items-center">
+        <div className="flex justify-between my-6 items-center">
           <div className="flex space-x-4 items-center">
-            <Image src={badge4} className="w-10 h-10" />
+            <Image src={immmunization} className="w-10 h-10" />
             <div className="flex flex-col gap-1">
               <p className="font-semibold text-sm">Immunizations</p>
               <p className="text-xs">10 total Immunizations </p>
@@ -92,16 +96,16 @@ export const Records = () => {
           </div>
           <div>
             <button className="text-indigo-500 flex items-center space-x-2 ">
-              <p className=" text-sm mr-4 ">Immunizations</p>
+              <p className=" text-sm mr-3 ">Immunizations</p>
               <FaGreaterThan />
             </button>
           </div>
         </div>
         <div className="border-b border-gray-400"></div>
         {/* Options available */}
-        <div className="flex justify-between my-5 items-center">
+        <div className="flex justify-between my-6 items-center">
           <div className="flex space-x-4 items-center">
-            <Image src={badge2} className="w-10 h-10" />
+            <Image src={result} className="w-10 h-10" />
             <div className="flex flex-col gap-1">
               <p className="font-semibold text-sm">Test results</p>
               <p className="text-xs">124 lab results </p>
@@ -109,7 +113,7 @@ export const Records = () => {
           </div>
           <div>
             <button className="text-indigo-500 flex items-center space-x-2 ">
-              <p className=" text-sm mr-4 ">Test results</p>
+              <p className=" text-sm mr-3 ">Test results</p>
               <FaGreaterThan />
             </button>
           </div>

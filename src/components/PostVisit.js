@@ -3,10 +3,13 @@ import {
   FaArrowUp,
   FaGreaterThan,
   FaSort,
+  FaSortDown,
   FaStoreAltSlash,
 } from "react-icons/fa";
-import badge2 from "/public/assets/badge2.png";
-import badge4 from "/public/assets/badge4.png";
+import ctk from "/public/assets/1.png";
+import imans from "/public/assets/2.png";
+import jj from "/public/assets/3.png";
+import salford from "/public/assets/4.png";
 import Image from "next/image";
 
 export const PostVisit = () => {
@@ -14,7 +17,7 @@ export const PostVisit = () => {
     <div className="h-full w-full flex flex-col p-6">
       {/* Header top */}
       <div className="flex justify-between space-x-4">
-        <p className="font-semibold text-lg">Doctor Visits</p>
+        <p className="font-semibold text-lg">Medical Check-in History</p>
         <div className="flex ">
           {/* <button className="text-indigo-500 flex items-center space-x-2 mr-6 ">
             <FaArrowUp />
@@ -22,7 +25,7 @@ export const PostVisit = () => {
           </button> */}
 
           <button className="text-indigo-500 flex items-center space-x-2">
-            <FaStoreAltSlash />
+            <FaSortDown className="mb-2"/>
             <p className=" ">Sort</p>
           </button>
         </div>
@@ -34,12 +37,12 @@ export const PostVisit = () => {
         <div className="flex justify-between mt-8 mb-5 items-center">
           <div className="flex space-x-6 items-center">
             <Image
-              src={badge2}
-              className="w-14 h-14 bg-gray-800 p-2 rounded-full"
+              src={ctk}
+              className="w-14 h-14 rounded-full"
             />
             <div className="flex flex-col gap-1">
-              <p className="font-semibold text-sm">Dr. Hopkins</p>
-              <p className="text-xs">Last visit: 13th - Dec - 2022 </p>
+              <p className="font-semibold text-sm">Christ The King Hospital</p>
+              <p className="text-xs">Last visit: 22nd-June-2023 </p>
             </div>
           </div>
           <div>
@@ -53,12 +56,12 @@ export const PostVisit = () => {
         <div className="flex justify-between mt-8 mb-5 items-center">
           <div className="flex space-x-6 items-center">
             <Image
-              src={badge2}
-              className="w-14 h-14 bg-gray-800 p-2 rounded-full"
+              src={salford}
+              className="w-14 h-14 rounded-full"
             />
             <div className="flex flex-col gap-1">
-              <p className="font-semibold text-sm">Dr. Hopkins</p>
-              <p className="text-xs">Last visit: 13th - Dec - 2022 </p>
+              <p className="font-semibold text-sm">Salford Medical Centre</p>
+              <p className="text-xs">Last visit: 1th-May-2023 </p>
             </div>
           </div>
           <div>
@@ -72,12 +75,12 @@ export const PostVisit = () => {
         <div className="flex justify-between mt-8 mb-5 items-center">
           <div className="flex space-x-6 items-center">
             <Image
-              src={badge2}
-              className="w-14 h-14 bg-gray-800 p-2 rounded-full"
+              src={imans}
+              className="w-14 h-14 rounded-full"
             />
             <div className="flex flex-col gap-1">
-              <p className="font-semibold text-sm">Dr. Hopkins</p>
-              <p className="text-xs">Last visit: 13th - Dec - 2022 </p>
+              <p className="font-semibold text-sm">IMans Memorial Hospital</p>
+              <p className="text-xs">Last visit: 8th-Oct-2022 </p>
             </div>
           </div>
           <div>
@@ -91,12 +94,12 @@ export const PostVisit = () => {
         <div className="flex justify-between mt-8 mb-5 items-center">
           <div className="flex space-x-6 items-center">
             <Image
-              src={badge2}
-              className="w-14 h-14 bg-gray-800 p-2 rounded-full"
+              src={jj}
+              className="w-14 h-14 rounded-full"
             />
             <div className="flex flex-col gap-1">
-              <p className="font-semibold text-sm">Dr. Hopkins</p>
-              <p className="text-xs">Last visit: 13th - Dec - 2022 </p>
+              <p className="font-semibold text-sm">Jakes & Jakes Medical Centre</p>
+              <p className="text-xs">Last visit: 11th-April-2022 </p>
             </div>
           </div>
           <div>

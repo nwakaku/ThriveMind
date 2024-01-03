@@ -82,8 +82,8 @@ export const Chat = () => {
   }, [arrayChat[2].user]);
 
   return (
-    <div class="flex h-screen pb-2 antialiased text-gray-800">
-      <div class="flex flex-row h-full w-full overflow-x-hidden">
+    <div class="flex h-screen antialiased text-gray-800">
+      <div class="flex flex-row h-[93%] w-full overflow-x-hidden">
         {/* side bar */}
         <div class="flex flex-col py-4 pl-4 pr-4 w-64 bg-white flex-shrink-0 my-6 rounded-xl">
           <div class="flex flex-row items-center justify-center h-8 w-full mt-5">
