@@ -47,7 +47,7 @@ export const Profile = ({ myDid, info }) => {
       <img
         class="w-24 h-24 mb-3 rounded-full shadow-lg"
         src={imageUrl}
-        alt="Bonnie image"
+        alt="image"
       />
       <h5 class="mb-2 text-xl font-medium text-gray-900 dark:text-white">
         {info ? info.username : null}
