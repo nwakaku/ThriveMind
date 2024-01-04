@@ -17,7 +17,7 @@ export const Web5Provider = ({ children }) => {
   const [info, setInfo] = useState();
   const [noteValue, setNoteValue] = useState("");
   const [journal, setJournal] = useState([]);
-  const [category, setCategory] = useState();
+  const [category, setCategory] = useState([]);
 
   //Goal
   const [goaltodo, setGoaltodo] = useState([

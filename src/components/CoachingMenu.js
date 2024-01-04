@@ -110,7 +110,7 @@ export const CoachingMenu = () => {
                 <div className="absolute bottom-0 left-0 right-0 flex items-center justify-center py-4">
                   <Link href="/chat">
                     <button
-                      onClick={setCategory(item.description)}
+                      onClick={setCategory(item.description, item.imageUrl, item.category)}
                       className="bg-blue-500 hover:bg-blue-800 text-white py-2 px-5 rounded-lg">
                       Chat
                     </button>

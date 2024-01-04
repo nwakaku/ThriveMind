@@ -4,12 +4,10 @@ export const ResourceCard = () => {
   return (
     <div class=" flex items-center justify-center ">
       <card class="bg-white p-8 w-[32rem] text-gray-900 rounded-lg">
-        <h2 class="font-bold text-2xl mt-2">
-          Tips and Resources
-        </h2>
+        <h2 class="font-bold text-2xl mt-2">Tips and Resources</h2>
 
-        <p class="mt-5">
-          Resources:
+        <p class="mt-5 text-wrap">
+          Sources:
           <a href="#" class="text-red-600">
             {" "}
             Ankush Gulati{" "}
@@ -19,10 +17,12 @@ export const ResourceCard = () => {
             {" "}
             David Gevorkyan{" "}
           </a>
-        </p>
-
-        <p>
-          Additional resources:
+          ,
+          <a href="#" class="text-red-600">
+            {" "}
+            Michael Clark{" "}
+          </a>
+          ,
           <a href="#" class="text-red-600">
             {" "}
             Michael Clark{" "}
@@ -33,6 +33,8 @@ export const ResourceCard = () => {
             Gokhan Ozer{" "}
           </a>
         </p>
+
+        
 
         <h3 class="font-bold text-lg mt-8"> Medical Tips </h3>
         <p class="font-light">

@@ -1,20 +1,201 @@
-import React from "react";
-import {
-  FaArrowUp,
-  FaGreaterThan,
-  FaSort,
-  FaSortDown,
-  FaStoreAltSlash,
-} from "react-icons/fa";
-import result from "/public/assets/result.png";
-import allergies from "/public/assets/allergies.png";
-import vital from "/public/assets/vitals.png";
-import conditions from "/public/assets/condition.png";
-import immmunization from "/public/assets/immunization.png";
-
+import { FaSortDown } from "react-icons/fa";
 import Image from "next/image";
+import allergies from "/public/assets/allergies.png";
+import condition from "/public/assets/condition.png";
+import immunization from "/public/assets/immunization.png";
+import vital from "/public/assets/vitals.png";
+import result from "/public/assets/result.png";
+import React, { useState } from "react";
+import { ArrowRightCircle, ArrowUpLeft } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+
+const recordData = () => {
+  return [
+    {
+      type: "Allergies",
+      count: 3,
+      label: "diagnosed allergies",
+      imageSrc: allergies,
+      details: [
+        {
+          allergen: "Peanuts",
+          reaction: "Hives",
+        },
+        {
+          allergen: "Penicillin",
+          reaction: "Anaphylaxis",
+        },
+        {
+          allergen: "Dust Mites",
+          reaction: "Runny nose",
+        },
+      ],
+    },
+    {
+      type: "Clinical Vitals",
+      count: 24,
+      label: "vital records",
+      imageSrc: vital,
+      details: [
+        {
+          date: "2023-01-15",
+          temperature: "98.6°F",
+          bloodPressure: "120/80 mmHg",
+          heartRate: "75 bpm",
+        },
+        {
+          date: "2023-02-02",
+          temperature: "99.2°F",
+          bloodPressure: "122/78 mmHg",
+          heartRate: "80 bpm",
+        },
+        // Additional records...
+      ],
+    },
+    {
+      type: "Conditions",
+      count: 3,
+      label: "known conditions",
+      imageSrc: condition,
+      details: [
+        {
+          condition: "Hypertension",
+          diagnosisDate: "2022-05-10",
+        },
+        {
+          condition: "Type 2 Diabetes",
+          diagnosisDate: "2021-08-20",
+        },
+        {
+          condition: "Asthma",
+          diagnosisDate: "2023-03-03",
+        },
+      ],
+    },
+    {
+      type: "Immunizations",
+      count: 10,
+      label: "total immunizations",
+      imageSrc: immunization,
+      details: [
+        {
+          vaccine: "COVID-19 Pfizer",
+          date: "2022-12-15",
+        },
+        {
+          vaccine: "Influenza",
+          date: "2022-10-02",
+        },
+        // Additional records...
+      ],
+    },
+    {
+      type: "Test Results",
+      count: 124,
+      label: "lab results",
+      imageSrc: result,
+      details: [
+        {
+          test: "Complete Blood Count (CBC)",
+          date: "2022-11-28",
+          result: "Normal",
+        },
+        {
+          test: "Lipid Panel",
+          date: "2023-01-10",
+          result: "High cholesterol",
+        },
+        // Additional records...
+      ],
+    },
+  ];
+};
+
+const EditDialog = ({ isOpen, onClose, recordType, recordDetails }) => {
+  return (
+    <Dialog isOpen={isOpen} onDismiss={onClose}>
+      <DialogTrigger asChild>
+        <button
+          className="text-sm font-medium text-indigo-500"
+          onClick={onClose}
+        >
+          <ArrowRightCircle />
+        </button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px] text-gray-700">
+        <DialogHeader>
+          <DialogTitle>{`${recordType} Details`}</DialogTitle>
+        </DialogHeader>
+        <div className="flex flex-col justify-around">
+          {recordDetails.map((detail, index) => (
+            <div key={index} className="flex flex-col items-start">
+              {Object.entries(detail).map(([key, value]) => (
+                <div key={key} className="my-3">
+                  <Label htmlFor={key} className="text-right font-semibold">
+                    {key.charAt(0).toUpperCase() + key.slice(1)}
+                  </Label>
+                  <p id={key} className="text-sm">
+                    {Array.isArray(value)
+                      ? value.map((item, idx) => (
+                          <div key={idx} className="ml-4">
+                            {Object.entries(item).map(
+                              ([itemKey, itemValue]) => (
+                                <p key={itemKey}>
+                                  <span className="font-semibold">
+                                    {itemKey}:
+                                  </span>{" "}
+                                  {itemValue}
+                                </p>
+                              )
+                            )}
+                          </div>
+                        ))
+                      : value}
+                  </p>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+        <DialogFooter>
+          <Button
+            className="mx-auto bg-indigo-500 hover:bg-indigo-700"
+            onClick={onClose}
+          >
+            Close
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+};
 
 export const Records = () => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedRecordType, setEditedRecordType] = useState("");
+  const [recordDetails, setRecordDetails] = useState([]);
+
+  const handleEditClick = (recordType, details) => {
+    setEditedRecordType(recordType);
+    setRecordDetails(details);
+    setIsEditing(true);
+  };
+
+  const handleCloseDialog = () => {
+    setIsEditing(false);
+    setRecordDetails([]);
+  };
+
   return (
     <div className="h-full w-full flex flex-col p-6">
       {/* Header top */}
@@ -22,6 +203,7 @@ export const Records = () => {
         <p className="font-semibold text-lg">Clinical data</p>
         <div className="flex ">
           <button className="text-indigo-500 flex items-center space-x-2 mr-6 ">
+            <ArrowUpLeft />
             <p className=" text-sm ">Export Medical Records</p>
           </button>
 
@@ -33,92 +215,41 @@ export const Records = () => {
       </div>
 
       {/* Main body */}
-      <div className="flex flex-col  mt-6">
+      <div className="flex flex-col mt-5">
         {/* Options available */}
-        <div className="flex justify-between my-6 items-center ">
-          <div className="flex space-x-4 items-center">
-            <Image src={allergies} className="w-10 h-10" />
-            <div className="flex flex-col gap-1">
-              <p className="font-semibold text-sm">Allergies</p>
-              <p className="text-xs">3 diagnosed allergies </p>
+        {recordData().map((record, index) => (
+          <>
+            <div key={index} className="flex justify-between my-6 items-center">
+              <div className="flex space-x-4 items-center">
+                <Image
+                  width="40"
+                  height="40"
+                  src={record.imageSrc}
+                  className="w-10 h-10"
+                />
+                <div className="flex flex-col gap-1">
+                  <p className="font-semibold text-sm">{record.type}</p>
+                  <p className="text-xs">{`${record.count} ${record.label}`}</p>
+                </div>
+              </div>
+              <div>
+                <button
+                  className="text-indigo-500 flex items-center space-x-2 "
+                  onClick={() => handleEditClick(record.type, record.details)}
+                >
+                  <p className=" text-sm mr-3 ">{record.type}</p>
+                  <EditDialog
+                    isOpen={isEditing && editedRecordType === record.type}
+                    onClose={handleCloseDialog}
+                    recordType={editedRecordType}
+                    recordDetails={recordDetails}
+                  />
+                </button>
+              </div>
             </div>
-          </div>
-          <div>
-            <button className="text-indigo-500 flex items-center space-x-2 ">
-              <p className=" text-sm mr-3 ">Allergies</p>
-              <FaGreaterThan/>
-            </button>
-          </div>
-        </div>
-        <div className="border-b border-gray-400"></div>
-        {/* Options available */}
-        <div className="flex justify-between my-6 items-center">
-          <div className="flex space-x-4 items-center">
-            <Image src={vital} className="w-10 h-10" />
-            <div className="flex flex-col gap-1">
-              <p className="font-semibold text-sm">Clinical vitals</p>
-              <p className="text-xs">24 vital records </p>
-            </div>
-          </div>
-          <div>
-            <button className="text-indigo-500 flex items-center space-x-2 ">
-              <p className=" text-sm mr-3 ">Clinical vitals</p>
-              <FaGreaterThan />
-            </button>
-          </div>
-        </div>
-        <div className="border-b border-gray-400"></div>
-        {/* Options available */}
-        <div className="flex justify-between my-6 items-center">
-          <div className="flex space-x-4 items-center">
-            <Image src={conditions} className="w-10 h-10" />
-            <div className="flex flex-col gap-1">
-              <p className="font-semibold text-sm">Conditions</p>
-              <p className="text-xs">3 known conditions </p>
-            </div>
-          </div>
-          <div>
-            <button className="text-indigo-500 flex items-center space-x-2 ">
-              <p className=" text-sm mr-3 ">Conditions</p>
-              <FaGreaterThan />
-            </button>
-          </div>
-        </div>
-        <div className="border-b border-gray-400"></div>
-        {/* Options available */}
-        <div className="flex justify-between my-6 items-center">
-          <div className="flex space-x-4 items-center">
-            <Image src={immmunization} className="w-10 h-10" />
-            <div className="flex flex-col gap-1">
-              <p className="font-semibold text-sm">Immunizations</p>
-              <p className="text-xs">10 total Immunizations </p>
-            </div>
-          </div>
-          <div>
-            <button className="text-indigo-500 flex items-center space-x-2 ">
-              <p className=" text-sm mr-3 ">Immunizations</p>
-              <FaGreaterThan />
-            </button>
-          </div>
-        </div>
-        <div className="border-b border-gray-400"></div>
-        {/* Options available */}
-        <div className="flex justify-between my-6 items-center">
-          <div className="flex space-x-4 items-center">
-            <Image src={result} className="w-10 h-10" />
-            <div className="flex flex-col gap-1">
-              <p className="font-semibold text-sm">Test results</p>
-              <p className="text-xs">124 lab results </p>
-            </div>
-          </div>
-          <div>
-            <button className="text-indigo-500 flex items-center space-x-2 ">
-              <p className=" text-sm mr-3 ">Test results</p>
-              <FaGreaterThan />
-            </button>
-          </div>
-        </div>
-        <div className="border-b border-gray-400"></div>
+            <div className="border-b border-gray-400"></div>
+          </>
+        ))}
       </div>
     </div>
   );

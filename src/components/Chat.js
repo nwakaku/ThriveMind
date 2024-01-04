@@ -103,14 +103,14 @@ export const Chat = () => {
                 ></path>
               </svg>
             </div>
-            <div class="ml-2 font-bold text-xl">Mental Health</div>
+            <div class="ml-2 font-bold text-xl">{category.category}</div>
           </div>
 
           <div class="flex justify-center mt-2">
             <a class="rounded-xl inline-block overflow-hidden shadow-xl max-w-xs cursor-pointer ">
               <div class="relative group w-full overflow-hidden bg-black h-28 rounded-t-xl">
                 <img
-                  src="https://images.unsplash.com/photo-1642764984362-54cae93c71b8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2276&q=80"
+                  src={category.imageUrl}
                   class="object-cover w-full h-full transform duration-700 backdrop-opacity-100"
                 />
                 <div class="absolute bg-gradient-to-t from-black w-full h-full flex items-end justify-center -inset-y-0">
@@ -122,8 +122,7 @@ export const Chat = () => {
               <div class="bg-gray-100 border">
                 <div class="text-center text-sm px-3 pb-6 pt-2">
                   <p class="mt-2 font-sans font-light text-slate-800">
-                    The former GDR working-class and industrial district has
-                    transformed into a trendy district and family quarter.
+                   {category.description}
                   </p>
                 </div>
                 
@@ -133,7 +132,7 @@ export const Chat = () => {
           <div class="flex flex-col mt-8">
             <div class="flex flex-row items-center justify-between text-xs">
               <span class="font-bold">Positive emotions</span>
-              <span class="flex items-center justify-center text-sm bg-gray-300 h-6 w-6 rounded-full">
+              <span class="flex items-center justify-center text-xs bg-gray-300 h-6 w-6 rounded-full">
                 34
               </span>
             </div>
@@ -155,7 +154,7 @@ export const Chat = () => {
           <div class="flex flex-col mt-6">
             <div class="flex flex-row items-center justify-between text-xs">
               <span class="font-bold">Negative emotions</span>
-              <span class="flex items-center justify-center text-sm bg-gray-300 h-6 w-6 rounded-full">
+              <span class="flex items-center justify-center text-xs bg-gray-300 h-6 w-6 rounded-full">
                 30
               </span>
             </div>
@@ -192,19 +191,19 @@ export const Chat = () => {
                         <p className="flex justify-around pt-2 space-x-2">
                           <div
                             onClick={() => setChat("I'm excited")}
-                            className="flex items-center text-zinc-700 text-sm bg-gray-200 font-semibold rounded-xl px-3 py-1 transition duration-300 ease-in-out transform hover:bg-gray-300 cursor-pointer"
+                            className="flex items-center text-zinc-700 text-sm bg-gray-200 font-semibold rounded-2xl px-3 py-1 transition duration-300 ease-in-out transform hover:bg-gray-300 cursor-pointer"
                           >
                             <p>😄 Excited</p>
                           </div>
                           <div
                             onClick={() => setChat("I'm happy")}
-                            className="flex items-center text-zinc-700 text-sm bg-gray-200 font-semibold rounded-xl px-3 py-1 transition duration-300 ease-in-out transform hover:bg-gray-300 cursor-pointer"
+                            className="flex items-center text-zinc-700 text-sm bg-gray-200 font-semibold rounded-2xl px-3 py-1 transition duration-300 ease-in-out transform hover:bg-gray-300 cursor-pointer"
                           >
                             <p>😊 Happy</p>
                           </div>
                           <div
                             onClick={() => setChat("I'm Depressed")}
-                            className="flex items-center text-zinc-700 text-sm bg-gray-200 font-semibold rounded-xl px-3 py-1 transition duration-300 ease-in-out transform hover:bg-gray-300 cursor-pointer"
+                            className="flex items-center text-zinc-700 text-sm bg-gray-200 font-semibold rounded-2xl px-3 py-1 transition duration-300 ease-in-out transform hover:bg-gray-300 cursor-pointer"
                           >
                             <p>😞 Depressed</p>
                           </div>
