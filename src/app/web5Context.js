@@ -17,31 +17,7 @@ export const Web5Provider = ({ children }) => {
   const [info, setInfo] = useState();
   const [noteValue, setNoteValue] = useState("");
   const [journal, setJournal] = useState([]);
-  const [category, setCategory] = useState();
-
-  //Goal
-  const [goaltodo, setGoaltodo] = useState([
-    {
-      id: 11,
-      description: "New Task 1",
-      completed: false,
-    },
-    {
-      id: 12,
-      description: "New Task 2",
-      completed: false,
-    },
-  ]);
-  const [goalstruct, setGoalstruct] = useState({
-    title: "",
-    content: "",
-    status: true,
-    task: {
-      total: 2,
-      completed: 0
-    }
-
-  })
+  const [goalsData, setGoalsData] = useState([]);
 
   const createProtocolDefinition = () => {
     const thrivemindProtocolDefinition = {
@@ -66,7 +42,7 @@ export const Web5Provider = ({ children }) => {
     return thrivemindProtocolDefinition;
   };
 
-  console.log(journal);
+  // console.log(journal);
 
   const queryForProtocol = async () => {
     const { web5 } = await Web5.connect();
@@ -111,6 +87,58 @@ export const Web5Provider = ({ children }) => {
     }
   };
 
+  //query for goals
+  const queryForGoal = async () => {
+    try {
+      const { web5 } = await Web5.connect();
+
+      const response = await web5.dwn.records.query({
+        message: {
+          filter: {
+            schema: "https://thrivemind.dev/createGoal",
+            dataFormat: "application/json",
+          },
+        },
+      });
+
+      const newData = await Promise.all(
+        response.records.map(async (record) => {
+          const data = await record.data.json();
+          console.log(data, "goals set");
+          return data;
+        })
+      );
+
+      setGoalsData(newData);
+    } catch (error) {
+      console.error("Error fetching and setting journal data:", error);
+    }
+  };
+
+  // Update Goals
+  const updateGoals = async (dataFile) => {
+    try {
+      const { web5 } = await Web5.connect();
+
+      const { record } = await web5.dwn.records.read({
+        message: {
+          filter: {
+            schema: "https://thrivemind.dev/createGoal",
+          },
+        },
+      });
+
+      const { status } = await record.update({ data: [dataFile] });
+      console.log(record);
+
+      setGoalsData(status);
+    } catch (error) {
+      console.error("Error fetching and setting journal data:", error);
+    }
+  };
+
+  //
+
   const installProtocolLocally = async (web5, protocolDefinition) => {
     return await web5.dwn.protocols.configure({
       message: {
@@ -145,7 +173,7 @@ export const Web5Provider = ({ children }) => {
   const createAcc = () => {
     const initWeb5 = async () => {
       const { web5, did } = await Web5.connect();
-      console.log(web5);
+      // console.log(web5);
 
       setWeb5(web5);
       localStorage.setItem("myDid", JSON.stringify(did));
@@ -194,25 +222,6 @@ export const Web5Provider = ({ children }) => {
     await queryForJournal();
   };
 
-  // Here we handle the Goal section
-  const constructGoalsData = () => {
-    const currentDate = new Date().toLocaleDateString();
-
-    const goalData = {
-      title: "New Goal 1",
-      status: "Active",
-      openedDate: currentDate,
-      content: "Description for the new goal 1...",
-      tasks: {
-        total: 3,
-        completed: 0,
-      },
-      todos: goaltodo,
-    };
-
-    return goalData;
-  };
-
   // Create a Profile record
   async function createProfile(username, imageFile) {
     const { web5 } = await Web5.connect();
@@ -246,6 +255,23 @@ export const Web5Provider = ({ children }) => {
     return record;
   }
 
+  async function createGoal(goals) {
+    const { web5 } = await Web5.connect();
+
+    const messageData = goals;
+
+    const { record } = await web5.dwn.records.create({
+      data: messageData,
+      message: {
+        schema: "https://thrivemind.dev/createGoal",
+        dataFormat: "application/json",
+      },
+    });
+    console.log(record);
+    setRecording(record);
+    return record;
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       const called = await queryForProtocol();
@@ -260,6 +286,9 @@ export const Web5Provider = ({ children }) => {
       );
 
       await queryForJournal();
+
+      // query for goals
+      await queryForGoal();
 
       // Filter out the first two elements
       const filteredprofileInfo = profileInfo;
@@ -343,6 +372,8 @@ export const Web5Provider = ({ children }) => {
     }
   }
 
+  console.log();
+
   const contextValue = {
     web5,
     myDid,
@@ -357,8 +388,9 @@ export const Web5Provider = ({ children }) => {
     info,
     journal,
     AI,
-    setCategory,
-    category,
+    createGoal,
+    goalsData,
+    updateGoals,
   };
 
   return (
