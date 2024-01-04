@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -136,7 +136,6 @@ const goalsMatric = [
   },
 ];
 
-
 const GoalItem = ({ goal }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedGoal, setEditedGoal] = useState({ ...goal });
@@ -145,7 +144,7 @@ const GoalItem = ({ goal }) => {
 
   const handleEditClick = () => {
     setIsEditing(true);
-  }; 
+  };
 
   const handleSaveChanges = () => {
     // Add logic to save the changes to your data source
@@ -237,8 +236,6 @@ const EditDialog = ({
     };
 
     setEditedGoal((prevGoal) => {
-      
-
       const logCompletedTodosLength = (prevGoal) => {
         const completedTodos = prevGoal.todos.filter(
           (todo) => todo.completed === true
@@ -246,16 +243,18 @@ const EditDialog = ({
         return completedTodos.length;
       };
 
+      const completedTodosLength = logCompletedTodosLength(prevGoal);
+
       return {
         ...prevGoal,
         status:
-          logCompletedTodosLength(prevGoal) === prevGoal.tasks.total + 1
+          completedTodosLength === prevGoal.tasks.total + 1
             ? "Completed"
             : "Active",
         tasks: {
           ...prevGoal.tasks,
           total: prevGoal.tasks.total + 1,
-          completed: logCompletedTodosLength(prevGoal),
+          completed: completedTodosLength,
         },
         todos: [...prevGoal.todos, newTodo],
       };

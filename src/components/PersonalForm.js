@@ -74,25 +74,6 @@ export const PersonalForm = () => {
         />
       </label>
 
-      {/* <label htmlFor="profilePic" className="block pt-4">
-        <span class="text-sm font-semibold text-zinc-500">
-          Upload profile photo
-        </span>
-        <input
-          type="file"
-          id="profilePic"
-          onChange={handleInputChange}
-          required
-          class="w-full text-sm text-white
-      file:mr-4 file:py-2 file:px-4 file:mt-2
-      file:rounded-full file:border-0
-      file:text-sm file:font-semibold
-      file:bg-blue-700 file:text-white
-      hover:file:bg-blue-900
-      
-    "
-        />
-      </label> */}
 
       <h1 class="text-1xl font-semibold mt-5">Interests :</h1>
       <p class="text-gray-300 text-sm font-normal flex gap gap-3 pt-2">
@@ -121,7 +102,7 @@ export const PersonalForm = () => {
 
       <button
         type="submit"
-        class="mt-5 border-2 px-5 py-2 rounded-lg border-blue-400 border-b-4 font-white translate-y-2 border-l-4 hover:border-blue-600">
+        class="mt-5 border-2 px-5 py-2 rounded-lg border-indigo-400 border-b-4 font-white translate-y-2 border-l-4 hover:border-indigo-500">
         Submit
       </button>
     </form>

@@ -38,40 +38,51 @@ export const Goal = () => {
           </div>
 
           {/* Opened goals */}
-         <ActiveGoals/>
+          <ActiveGoals />
           {/* Completed goals */}
-          <CompletedGoals/>
+          <CompletedGoals />
           {/* Badges earned */}
           <div class="px-4">
             <div class="my-5">
               <h2 class="text-lg font-semibold text-gray-900">Earned Badges</h2>
             </div>
             <div className="flex space-x-6 justify-around">
-             
               <div className="flex flex-col items-center">
                 <p className="font-semibold text-gray-900">Cadet x1</p>
-                <Image src={badge3} className="w-20 h-20 bg-zinc-900 mb-3 mt-1 rounded-full p-3" />
+                <Image
+                  src={badge3}
+                  className="w-20 h-20 bg-zinc-900 mb-3 mt-1 rounded-full p-3"
+                />
                 <p className="text-sm text-gray-600 max-w-30">
                   Earned for completing first goal
                 </p>
               </div>
               <div className="flex flex-col items-center">
                 <p className="font-semibold text-gray-900">Rosian x0</p>
-                <Image src={badge1} className="w-20 h-20 bg-zinc-900 mb-3 mt-1 rounded-full p-3" />
+                <Image
+                  src={badge1}
+                  className="w-20 h-20 bg-zinc-900 mb-3 mt-1 rounded-full p-3"
+                />
                 <p className="text-sm text-gray-600 max-w-30">
                   Earned for completing 15 goals
                 </p>
               </div>
               <div className="flex flex-col items-center">
                 <p className="font-semibold text-gray-900">Veteran x0</p>
-                <Image src={badge5} className="w-20 h-20 bg-zinc-900 mb-3 mt-1 rounded-full p-3" />
+                <Image
+                  src={badge5}
+                  className="w-20 h-20 bg-zinc-900 mb-3 mt-1 rounded-full p-3"
+                />
                 <p className="text-sm text-gray-600 max-w-30">
                   Earned for completing 30 goals
                 </p>
               </div>
               <div className="flex flex-col items-center">
                 <p className="font-semibold text-gray-900">Sensei x0</p>
-                <Image src={badge2} className="w-20 h-20 bg-zinc-900 mb-3 mt-1 rounded-full p-3" />
+                <Image
+                  src={badge2}
+                  className="w-20 h-20 bg-zinc-900 mb-3 mt-1 rounded-full p-3"
+                />
                 <p className="text-sm text-gray-600 max-w-30">
                   Earned for completing 50+ goals
                 </p>

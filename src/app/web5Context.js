@@ -18,6 +18,22 @@ export const Web5Provider = ({ children }) => {
   const [noteValue, setNoteValue] = useState("");
   const [journal, setJournal] = useState([]);
   const [goalsData, setGoalsData] = useState([]);
+  const [category, setCategory] = useState({
+    description: "",
+    imageUrl: "",
+    category: "",
+  });
+
+  //
+  // // Function to set the state
+  // const updateCategory = (newDescription, newImageUrl, newCategory) => {
+  //   setCategory({
+  //     description: newDescription,
+  //     imageUrl: newImageUrl,
+  //     category: newCategory,
+  //   });
+  // }; 
+
 
   const createProtocolDefinition = () => {
     const thrivemindProtocolDefinition = {
@@ -104,7 +120,7 @@ export const Web5Provider = ({ children }) => {
       const newData = await Promise.all(
         response.records.map(async (record) => {
           const data = await record.data.json();
-          console.log(data, "goals set");
+          // console.log(data, "goals set");
           return data;
         })
       );
@@ -372,7 +388,6 @@ export const Web5Provider = ({ children }) => {
     }
   }
 
-  console.log();
 
   const contextValue = {
     web5,
@@ -391,6 +406,8 @@ export const Web5Provider = ({ children }) => {
     createGoal,
     goalsData,
     updateGoals,
+    category,
+    setCategory,
   };
 
   return (

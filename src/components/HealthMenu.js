@@ -5,7 +5,11 @@ import { Records } from "./Records";
 import { FindDoctors } from "./FindDoctors";
 import { AIAnalyser } from "./AIAnalyser";
 import { PostVisit } from "./PostVisit";
-import badge1 from "/public/assets/badge1.png";
+import record from "/public/assets/Records.png";
+import search from "/public/assets/Search2.png";
+import Ai from '/public/assets/AIAnalyser.png';
+import visit from '/public/assets/visit.png'
+
 
 export const Health = () => {
   const [activeComponent, setActiveComponent] = useState("records");
@@ -14,22 +18,22 @@ export const Health = () => {
   const componentHeaderInfo = {
     records: {
       title: "Medical Records",
-      image: badge1,
+      image: record,
       buttonText: "Import Your Records",
     },
     postVisit: {
       title: "Post Visits",
-      image: badge1, // Replace with the correct image for post visits
+      image: visit, // Replace with the correct image for post visits
       buttonText: "Schedule appointment",
     },
     aiAnalyser: {
       title: "AI Report Analyser.",
-      image: badge1, // Replace with the correct image for AI Analyser
+      image: Ai, // Replace with the correct image for AI Analyser
       buttonText: "Upload Report",
     },
     findDoctors: {
       title: "Find Doctors and Centres",
-      image: badge1, // Replace with the correct image for Find Doctors
+      image: search, // Replace with the correct image for Find Doctors
       buttonText: "Search",
     },
   };
@@ -60,7 +64,7 @@ export const Health = () => {
           <p className="text-2xl font-bold ml-3 text-gray-200">{title}</p>
         </div>
         <Button
-          className=" bg-indigo-500 hover:bg-indigo-700 px-4"
+          className=" bg-indigo-600 hover:bg-indigo-700 px-4"
           onClick={() => {
             // Add the logic for the create button click here
           }}
@@ -75,35 +79,35 @@ export const Health = () => {
             className="mx-auto hover:bg-gray-100 p-3 rounded-xl"
             onClick={() => setActiveComponent("records")}
           >
-            <Image src={badge1} className="w-16 h-16 mx-auto" />
+            <Image src={record} className="w-16 h-16 mx-auto" />
             <p className="text-lg text-gray-900 font-bold mt-1">Records</p>
           </button>
           <button
             className="mx-auto hover:bg-gray-100 p-3 rounded-xl"
             onClick={() => setActiveComponent("postVisit")}
           >
-            <Image src={badge1} className="w-16 h-16 mx-auto" />
-            <p className="text-lg  text-gray-900 font-bold mt-1">Post Visits</p>
+            <Image src={visit} className="w-16 h-16 mx-auto" />
+            <p className="text-lg  text-gray-900 font-bold mt-1">Checkups</p>
           </button>
           <button
             className="mx-auto hover:bg-gray-100 p-3 rounded-xl"
             onClick={() => setActiveComponent("aiAnalyser")}
           >
-            <Image src={badge1} className="w-16 h-16 mx-auto" />
+            <Image src={Ai} className="w-16 h-16 mx-auto" />
             <p className="text-lg  text-gray-900 font-bold mt-1">AI Doc.</p>
           </button>
           <button
             className="mx-auto hover:bg-gray-100 p-3 rounded-xl"
             onClick={() => setActiveComponent("findDoctors")}
           >
-            <Image src={badge1} className="w-16 h-16 mx-auto" />
+            <Image src={search} className="w-16 h-16 mx-auto" />
             <p className="text-lg text-gray-900 font-bold mt-1">Search</p>
           </button>
         </div>
 
         {/* Main chat  */}
         <div class="flex flex-col flex-auto h-full p-6">
-          <div class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full p-4">
+          <div class="relative flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full p-4">
             {renderActiveComponent()}
           </div>
         </div>
