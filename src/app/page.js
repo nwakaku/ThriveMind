@@ -5,8 +5,7 @@ import { Navbar } from "@/components/Navbar";
 import { useWeb5 } from "./web5Context";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { AIAnalyser } from "@/components/AIAnalyser";
-import { FindDoctors } from "@/components/FindDoctors";
+import { Landing } from "@/components/Landing";
 
 export default function Home() {
   const { myDid, createAcc } = useWeb5();
@@ -24,9 +23,10 @@ export default function Home() {
   }, [myDid]);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-center justify-between px-24 pt-24 pb-5">
       <Navbar myDid={myDid} createAcc={createAcc} />
-      <Jumb/>
+      {/* <Jumb/> */}
+      <Landing/>
     </main>
   );
 }
