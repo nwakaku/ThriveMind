@@ -1,10 +1,4 @@
 import React from "react";
-import badge1 from "/public/assets/badge1.png";
-import badge2 from "/public/assets/badge2.png";
-import badge3 from "/public/assets/badge3.png";
-import badge4 from "/public/assets/badge4.png";
-import badge5 from "/public/assets/badge5.png";
-import Image from "next/image";
 import { ActiveGoals, CompletedGoals } from "./GoalCard";
 
 export const Goal = () => {
@@ -49,8 +43,8 @@ export const Goal = () => {
             <div className="flex space-x-6 justify-around">
               <div className="flex flex-col items-center">
                 <p className="font-semibold text-gray-900">Cadet x1</p>
-                <Image
-                  src={badge3}
+                <img
+                  src='https://i.ibb.co/x8rf7GT/badge3.png'
                   className="w-20 h-20 bg-zinc-900 mb-3 mt-1 rounded-full p-3"
                 />
                 <p className="text-sm text-gray-600 max-w-30">
@@ -59,8 +53,8 @@ export const Goal = () => {
               </div>
               <div className="flex flex-col items-center">
                 <p className="font-semibold text-gray-900">Rosian x0</p>
-                <Image
-                  src={badge1}
+                <img
+                  src='https://i.ibb.co/P5H3WH3/badge1.png'
                   className="w-20 h-20 bg-zinc-900 mb-3 mt-1 rounded-full p-3"
                 />
                 <p className="text-sm text-gray-600 max-w-30">
@@ -69,8 +63,8 @@ export const Goal = () => {
               </div>
               <div className="flex flex-col items-center">
                 <p className="font-semibold text-gray-900">Veteran x0</p>
-                <Image
-                  src={badge5}
+                <img
+                  src='https://i.ibb.co/Tm8dz5W/badge5.png'
                   className="w-20 h-20 bg-zinc-900 mb-3 mt-1 rounded-full p-3"
                 />
                 <p className="text-sm text-gray-600 max-w-30">
@@ -79,8 +73,8 @@ export const Goal = () => {
               </div>
               <div className="flex flex-col items-center">
                 <p className="font-semibold text-gray-900">Sensei x0</p>
-                <Image
-                  src={badge2}
+                <img
+                  src='https://i.ibb.co/0Y3N0hd/badge2.png'
                   className="w-20 h-20 bg-zinc-900 mb-3 mt-1 rounded-full p-3"
                 />
                 <p className="text-sm text-gray-600 max-w-30">

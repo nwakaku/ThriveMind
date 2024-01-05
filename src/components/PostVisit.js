@@ -1,8 +1,4 @@
 import { FaSortDown } from "react-icons/fa";
-import ctk from "/public/assets/1.png";
-import imans from "/public/assets/2.png";
-import jj from "/public/assets/3.png";
-import salford from "/public/assets/4.png";
 import Image from "next/image";
 import React, { useState } from "react";
 import { ArrowRightCircle, ArrowUpLeft } from "lucide-react";
@@ -13,49 +9,65 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogClose
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 
+const ctk = "https://i.ibb.co/SnMGHdq/1.png";
+const imans = "https://i.ibb.co/3z55V65/2.png";
+const jj = "https://i.ibb.co/QQB5z95/3.png";
+const salford = "https://i.ibb.co/fkB5tRK/4.png";
+
+
 const postVisitData = () => {
   return [
     {
       hospital: "Christ The King Hospital",
-      lastVisit: "22nd-June-2023",
+      last_Visit: "22nd-June-2023",
       doctor: "Dr. Johnson",
-      condition: "Fever",
-      medication: "Paracetamol",
-      nextAppointment: "30th-July-2023",
+      condition: "Hypertension",
+      medication: "Lisinopril",
+      medication_Instructions: "Take 1 tablet in the morning and 1 tablet at night",
+      next_Appointment: "30th-July-2023",
+      img: ctk
     },
     {
       hospital: "Salford Medical Centre",
-      lastVisit: "1th-May-2023",
+      last_Visit: "1th-May-2023",
       doctor: "Dr. Smith",
-      condition: "Cough",
-      medication: "Cough Syrup",
-      nextAppointment: "15th-June-2023",
+      condition: "Chronic Bronchitis",
+      medication: "Inhaled Corticosteroids",
+      medication_Instructions: "Use inhaler 2 puffs every 12 hours",
+      next_Appointment: "15th-June-2023",
+      img: salford
     },
     {
       hospital: "IMans Memorial Hospital",
-      lastVisit: "8th-Oct-2022",
+      last_Visit: "8th-Oct-2022",
       doctor: "Dr. Patel",
-      condition: "Headache",
-      medication: "Aspirin",
-      nextAppointment: "12th-Nov-2022",
+      condition: "Type 2 Diabetes",
+      medication: "Metformin",
+      medication_Instructions: "Take 1 tablet with meals",
+      next_Appointment: "12th-Nov-2022",
+      img: imans
     },
     {
       hospital: "Jakes & Jakes Medical Centre",
-      lastVisit: "11th-April-2022",
+      last_Visit: "11th-April-2022",
       doctor: "Dr. Brown",
-      condition: "Allergy",
-      medication: "Antihistamine",
-      nextAppointment: "25th-May-2022",
+      condition: "Rheumatoid Arthritis",
+      medication: "Methotrexate",
+      medication_Instructions: "Take 1 tablet once a week",
+      next_Appointment: "25th-May-2022",
+      img: jj
     },
   ];
 };
 
-const EditDialog = ({ isOpen, onClose, recordType, recordDetails }) => {
+
+const EditDialog = ({ isOpen, onClose, recordType, recordDetails, recordImage }) => {
   return (
     <Dialog isOpen={isOpen} onDismiss={onClose}>
       <DialogTrigger asChild>
@@ -67,33 +79,39 @@ const EditDialog = ({ isOpen, onClose, recordType, recordDetails }) => {
         </button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] text-gray-700">
-        <DialogHeader>
-          <DialogTitle>{`${recordType} Details`}</DialogTitle>
+        <DialogHeader className='flex flex-row items-center'>
+          <img className="w-6 h-6 mr-2 mt-1 rounded-full" src={recordImage}/>
+          <DialogTitle>{`Checkup Details`}</DialogTitle>
         </DialogHeader>
         <div className="flex flex-col justify-around">
           {Object.entries(recordDetails).map(([key, value]) => (
-            <div key={key} className="my-3">
-              <Label htmlFor={key} className="text-right font-semibold">
-                {key.charAt(0).toUpperCase() + key.slice(1)}
-              </Label>
-              <p id={key} className="text-sm">
-                {value}
-              </p>
-            </div>
+            key !== "img" && (
+              <div key={key} className="my-3">
+                <Label htmlFor={key} className="text-right font-semibold">
+                  {key.charAt(0).toUpperCase() + key.slice(1)}
+                </Label>
+                <p id={key} className="text-sm">
+                  {value}
+                </p>
+              </div>
+            )
           ))}
         </div>
         <DialogFooter>
-          <Button
-            className="mx-auto bg-indigo-500 hover:bg-indigo-700"
-            onClick={onClose}
-          >
-            Close
-          </Button>
+          <DialogClose asChild>
+            <Button
+              className="mx-auto bg-indigo-500 hover:bg-indigo-700"
+              onClick={onClose}
+            >
+              Set Reminder
+            </Button>
+          </DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>
   );
 };
+
 
 export const PostVisit = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -139,7 +157,7 @@ export const PostVisit = () => {
               className="flex justify-between mt-8 mb-5 items-center"
             >
               <div className="flex space-x-6 items-center">
-                <Image
+                <img
                   width="56"
                   height="56"
                   src={
@@ -168,6 +186,7 @@ export const PostVisit = () => {
                     onClose={handleCloseDialog}
                     recordType={editedRecordType}
                     recordDetails={recordDetails}
+                    recordImage={record.img}
                   />
                 </button>
               </div>

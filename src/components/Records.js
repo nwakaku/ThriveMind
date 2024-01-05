@@ -1,10 +1,5 @@
 import { FaSortDown } from "react-icons/fa";
 import Image from "next/image";
-import allergies from "/public/assets/allergies.png";
-import condition from "/public/assets/condition.png";
-import immunization from "/public/assets/immunization.png";
-import vital from "/public/assets/vitals.png";
-import result from "/public/assets/result.png";
 import React, { useState } from "react";
 import { ArrowRightCircle, ArrowUpLeft } from "lucide-react";
 import {
@@ -14,6 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogClose
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -25,18 +21,18 @@ const recordData = () => {
       type: "Allergies",
       count: 3,
       label: "diagnosed allergies",
-      imageSrc: allergies,
+      imageSrc: "https://i.ibb.co/1Z3fXW1/allergies.png",
       details: [
         {
-          allergen: "Peanuts",
+          allergy: "Peanuts",
           reaction: "Hives",
         },
         {
-          allergen: "Penicillin",
+          allergy: "Penicillin",
           reaction: "Anaphylaxis",
         },
         {
-          allergen: "Dust Mites",
+          allergy: "Dust Mites",
           reaction: "Runny nose",
         },
       ],
@@ -45,7 +41,7 @@ const recordData = () => {
       type: "Clinical Vitals",
       count: 24,
       label: "vital records",
-      imageSrc: vital,
+      imageSrc: "https://i.ibb.co/X7709gS/vitals.png",
       details: [
         {
           date: "2023-01-15",
@@ -66,7 +62,7 @@ const recordData = () => {
       type: "Conditions",
       count: 3,
       label: "known conditions",
-      imageSrc: condition,
+      imageSrc: "https://i.ibb.co/xGGrzR8/condition.png",
       details: [
         {
           condition: "Hypertension",
@@ -86,7 +82,7 @@ const recordData = () => {
       type: "Immunizations",
       count: 10,
       label: "total immunizations",
-      imageSrc: immunization,
+      imageSrc: "https://i.ibb.co/mq6pMx2/immunization.png",
       details: [
         {
           vaccine: "COVID-19 Pfizer",
@@ -103,7 +99,7 @@ const recordData = () => {
       type: "Test Results",
       count: 124,
       label: "lab results",
-      imageSrc: result,
+      imageSrc: "https://i.ibb.co/D9qYtMN/result.png",
       details: [
         {
           test: "Complete Blood Count (CBC)",
@@ -121,7 +117,7 @@ const recordData = () => {
   ];
 };
 
-const EditDialog = ({ isOpen, onClose, recordType, recordDetails }) => {
+const EditDialog = ({ isOpen, onClose, recordType, recordDetails, recordImage }) => {
   return (
     <Dialog isOpen={isOpen} onDismiss={onClose}>
       <DialogTrigger asChild>
@@ -133,47 +129,53 @@ const EditDialog = ({ isOpen, onClose, recordType, recordDetails }) => {
         </button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] text-gray-700">
-        <DialogHeader>
-          <DialogTitle>{`${recordType} Details`}</DialogTitle>
+        <DialogHeader className='flex flex-row items-center'>
+          <img className="w-6 h-6 mr-2 mt-1" src={recordImage}/>
+          <DialogTitle>{`${recordType} Record`}</DialogTitle>
         </DialogHeader>
         <div className="flex flex-col justify-around">
           {recordDetails.map((detail, index) => (
-            <div key={index} className="flex flex-col items-start">
-              {Object.entries(detail).map(([key, value]) => (
-                <div key={key} className="my-3">
-                  <Label htmlFor={key} className="text-right font-semibold">
-                    {key.charAt(0).toUpperCase() + key.slice(1)}
-                  </Label>
-                  <p id={key} className="text-sm">
-                    {Array.isArray(value)
-                      ? value.map((item, idx) => (
-                          <div key={idx} className="ml-4">
-                            {Object.entries(item).map(
-                              ([itemKey, itemValue]) => (
-                                <p key={itemKey}>
-                                  <span className="font-semibold">
-                                    {itemKey}:
-                                  </span>{" "}
-                                  {itemValue}
-                                </p>
-                              )
-                            )}
-                          </div>
-                        ))
-                      : value}
-                  </p>
-                </div>
-              ))}
-            </div>
+            <>
+              <div key={index} className="flex flex-col items-start">
+                {Object.entries(detail).map(([key, value]) => (
+                  <div key={key} className="my-3">
+                    <Label htmlFor={key} className="text-right font-semibold">
+                      {key.charAt(0).toUpperCase() + key.slice(1)}
+                    </Label>
+                    <p id={key} className="text-sm">
+                      {Array.isArray(value)
+                        ? value.map((item, idx) => (
+                            <div key={idx} className="ml-4">
+                              {Object.entries(item).map(
+                                ([itemKey, itemValue]) => (
+                                  <p key={itemKey}>
+                                    <span className="font-semibold">
+                                      {itemKey}:
+                                    </span>{" "}
+                                    {itemValue}
+                                  </p>
+                                )
+                              )}
+                            </div>
+                          ))
+                        : value}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <div className="border-b border-gray-400"></div>
+            </>
           ))}
         </div>
         <DialogFooter>
-          <Button
-            className="mx-auto bg-indigo-500 hover:bg-indigo-700"
-            onClick={onClose}
-          >
-            Close
-          </Button>
+          <DialogClose asChild>
+            <Button
+              className="mx-auto bg-indigo-500 hover:bg-indigo-700"
+              onClick={onClose}
+            >
+              Close
+            </Button>
+          </DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>
@@ -243,6 +245,7 @@ export const Records = () => {
                     onClose={handleCloseDialog}
                     recordType={editedRecordType}
                     recordDetails={recordDetails}
+                    recordImage={record.imageSrc}
                   />
                 </button>
               </div>
