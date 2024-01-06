@@ -20,7 +20,7 @@ export const Landing = () => {
 
             <a
               href="/services"
-              class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
+              class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 dark:focus:ring-indigo-900"
             >
               Get started
               <svg
@@ -129,9 +129,9 @@ export const Landing = () => {
           </div>
           <div class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-2 md:gap-12 md:space-y-0">
             <div className="">
-              <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-blue-100 lg:h-12 lg:w-12 dark:bg-blue-900">
+              <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-indigo-100 lg:h-12 lg:w-12 dark:bg-indigo-900">
                 <svg
-                  class="w-5 h-5 text-blue-600 lg:w-6 lg:h-6 dark:text-blue-300"
+                  class="w-5 h-5 text-indigo-600 lg:w-6 lg:h-6 dark:text-indigo-300"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -149,9 +149,9 @@ export const Landing = () => {
               </p>
             </div>
             <div>
-              <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-blue-100 lg:h-12 lg:w-12 dark:bg-blue-900">
+              <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-indigo-100 lg:h-12 lg:w-12 dark:bg-indigo-900">
                 <svg
-                  class="w-5 h-5 text-blue-600 lg:w-6 lg:h-6 dark:text-blue-300"
+                  class="w-5 h-5 text-indigo-600 lg:w-6 lg:h-6 dark:text-indigo-300"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                   xmlns="http://www.w3.org/2000/svg"
@@ -173,8 +173,8 @@ export const Landing = () => {
               </p>
             </div>
             <div>
-              <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-blue-100 lg:h-12 lg:w-12 dark:bg-blue-900">
-                <BookOpen className="text-blue-300" />
+              <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-indigo-100 lg:h-12 lg:w-12 dark:bg-indigo-900">
+                <BookOpen className="text-indigo-300" />
               </div>
               <h3 class="mb-2 text-xl font-bold dark:text-white">Journal</h3>
               <p class="text-gray-500 dark:text-gray-400">
@@ -183,8 +183,8 @@ export const Landing = () => {
               </p>
             </div>
             <div>
-              <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-blue-100 lg:h-12 lg:w-12 dark:bg-blue-900">
-                <HeartPulseIcon className="text-blue-300" />
+              <div class="flex justify-center items-center mb-4 w-10 h-10 rounded-full bg-indigo-100 lg:h-12 lg:w-12 dark:bg-indigo-900">
+                <HeartPulseIcon className="text-indigo-300" />
               </div>
               <h3 class="mb-2 text-xl font-bold dark:text-white">Health Pro</h3>
               <p class="text-gray-500 dark:text-gray-400">
@@ -415,7 +415,7 @@ export const Landing = () => {
               <a href="https://flowbite.com" class="flex items-center">
                 <img
                   src="https://i.ibb.co/WGcR7Lv/2.png"
-                  className="mr-2 h-10 w-10 bg-gray-100 p-1 rounded-full font-extrabold text-blue-200"
+                  className="mr-2 h-10 w-10 bg-gray-100 p-1 rounded-full font-extrabold text-indigo-200"
                   alt="trive Logo"
                 />
                 <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
