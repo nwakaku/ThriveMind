@@ -2,7 +2,7 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
 import { Web5 } from "@web5/api";
-import axios from "axios";
+// import axios from "axios";
 
 const Web5Context = createContext();
 
@@ -32,8 +32,7 @@ export const Web5Provider = ({ children }) => {
   //     imageUrl: newImageUrl,
   //     category: newCategory,
   //   });
-  // }; 
-
+  // };
 
   const createProtocolDefinition = () => {
     const thrivemindProtocolDefinition = {
@@ -144,7 +143,7 @@ export const Web5Provider = ({ children }) => {
         },
       });
 
-      const { status } = await record.update({ data: [dataFile] });
+      const { status } = await record.update({ data: dataFile });
       console.log(record);
 
       setGoalsData(status);
@@ -291,7 +290,6 @@ export const Web5Provider = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       const called = await queryForProtocol();
-      console.log({ called });
 
       const profileInfo = await Promise.all(
         called.records.map(async (record) => {
@@ -335,6 +333,7 @@ export const Web5Provider = ({ children }) => {
   // this where the AI function is written
 
   async function AI(userInputs, category) {
+    console.log(category);
     const apiKey = "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";
     if (!apiKey) {
       throw new Error("API key not found in environment variables.");
@@ -388,6 +387,61 @@ export const Web5Provider = ({ children }) => {
     }
   }
 
+  // this where the AI function is written
+
+  async function AIHealth(userInputs) {
+    const apiKey = "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";
+    if (!apiKey) {
+      throw new Error("API key not found in environment variables.");
+    }
+
+    const endpoint = "https://api.openai.com/v1/chat/completions";
+
+    // Prepare the request payload
+    const payload = {
+      model: "gpt-3.5-turbo-1106",
+      response_format: { type: "json_object" },
+      messages: [
+        {
+          role: "system",
+          content: `You are a medical counselor assistant, designed to output JSON.`,
+        },
+        { role: "user", content: "Hello my name is patient" },
+        {
+          role: "assistant",
+          content: "Okay Welcome patient, what's your question?",
+        },
+        {
+          role: "user",
+          content: ` my question: ${userInputs} ?`,
+        },
+      ],
+      max_tokens: 200,
+      temperature: 0.7,
+      n: 1,
+    };
+
+    // Make the API request to ChatGPT API
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify(payload),
+      });
+
+      // Parse the response
+      const data = await response.json();
+      console.log(data);
+      const generatedSentence = data.choices[0].message.content;
+      return generatedSentence;
+    } catch (error) {
+      console.error("Error:", error);
+      throw error;
+    }
+  }
 
   const contextValue = {
     web5,
@@ -403,6 +457,7 @@ export const Web5Provider = ({ children }) => {
     info,
     journal,
     AI,
+    AIHealth,
     createGoal,
     goalsData,
     updateGoals,

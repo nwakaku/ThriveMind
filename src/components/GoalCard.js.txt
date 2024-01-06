@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogClose,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -20,7 +20,7 @@ const goalsMatric = [
   {
     title: "Physio-therapy session",
     status: "Active",
-    openedDate: "1/01/2024",
+    date: "1-01-2024",
     content: "I'm going for three sessions with miss Nitta for therapy ...",
     tasks: {
       total: 4,
@@ -43,7 +43,7 @@ const goalsMatric = [
   {
     title: "Gym workout",
     status: "Active",
-    openedDate: "2-01-2024",
+    date: "2-01-2024",
     content:
       "Working out at the gym to stay fit and healthy and bubbling rata...",
     tasks: {
@@ -70,8 +70,8 @@ const goalsMatric = [
     date: "3-01-2024",
     content: "Daily yoga and meditation practice for mental well-being...",
     tasks: {
-      total: 2,
-      completed: 2,
+      total: 4,
+      completed: 4,
     },
     todos: [
       {
@@ -94,8 +94,8 @@ const goalsMatric = [
     content:
       "Studying and practicing a new language for personal development...",
     tasks: {
-      total: 2,
-      completed: 2,
+      total: 6,
+      completed: 6,
     },
     todos: [
       {
@@ -136,7 +136,6 @@ const goalsMatric = [
   },
 ];
 
-
 const GoalItem = ({ goal }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedGoal, setEditedGoal] = useState({ ...goal });
@@ -158,7 +157,7 @@ const GoalItem = ({ goal }) => {
   };
 
   return (
-    <div className="mb-6 rounded-lg bg-gray-200 p-6">
+    <div className="mb-6 rounded-lg bg-white p-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           <div>
@@ -254,7 +253,7 @@ const EditDialog = ({
             : "Active",
         tasks: {
           ...prevGoal.tasks,
-          total: todos.length,
+          total: prevGoal.tasks.total + 1,
           completed: completedTodosLength,
         },
         todos: [...prevGoal.todos, newTodo],
@@ -288,11 +287,24 @@ const EditDialog = ({
 
   // Function to delete a todo
   const handleDeleteTodo = (todoId) => {
-    const updatedTodos = todos.filter((todo) => todo.id !== todoId);
-    setEditedGoal((prevGoal) => ({
-      ...prevGoal,
-      todos: updatedTodos,
-    }));
+    setEditedGoal((prevGoal) => {
+      const updatedTodos = prevGoal.todos.filter((todo) => todo.id !== todoId);
+
+      const newTasksCompleted = updatedTodos.filter(
+        (todo) => todo.completed
+      ).length;
+
+      return {
+        ...prevGoal,
+        status:
+          newTasksCompleted === prevGoal.tasks.total ? "Completed" : "Active",
+        tasks: {
+          ...prevGoal.tasks,
+          completed: newTasksCompleted,
+        },
+        todos: updatedTodos,
+      };
+    });
   };
 
   return (
@@ -386,13 +398,11 @@ const EditDialog = ({
           </div>
         </div>
         <DialogFooter>
-          <DialogClose asChild>
-            <Button
-              className="mx-auto bg-indigo-500 hover:bg-indigo-700"
-              onClick={handleSaveChanges}>
-              Save changes
-            </Button>
-          </DialogClose>
+          <Button
+            className="mx-auto bg-indigo-500 hover:bg-indigo-700"
+            onClick={handleSaveChanges}>
+            Save changes
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
@@ -400,15 +410,16 @@ const EditDialog = ({
 };
 
 const GoalsSection = ({ goals, title, create }) => {
-  //   console.log(goals);
-  const { createGoal, goalsData } = useWeb5();
+  console.log(goals);
+  const { createGoal } = useWeb5();
+
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
 
   const handleCreateClick = () => {
     setIsCreateDialogOpen(true);
   };
 
-  const handleSaveNewGoal = async (newGoal) => {
+  const handleSaveNewGoal = (newGoal) => {
     // Add logic to save the new goal to your data source
     // For now, let's just log the new goal
     console.log("New Goal:", newGoal);
@@ -439,7 +450,10 @@ const GoalsSection = ({ goals, title, create }) => {
 
 export const ActiveGoals = () => {
   const { goalsData } = useWeb5();
-  console.log(goalsData);
+
+  console.log(goalsData.filter((goal) => goal.status === "Active"));
+
+
   return (
     <div>
       <GoalsSection
@@ -452,10 +466,12 @@ export const ActiveGoals = () => {
 };
 
 export const CompletedGoals = () => {
+    const { goalsData } = useWeb5();
+
   return (
     <div>
       <GoalsSection
-        goals={goalsMatric.filter((goal) => goal.status === "Completed")}
+        goals={goalsData.filter((goal) => goal.status === "Completed")}
         title="Completed Goals"
       />
     </div>
@@ -489,11 +505,19 @@ const CreateDialog = ({
     };
 
     setEditedGoal((prevGoal) => {
+      const newTasksCompleted =
+        prevGoal.tasks.completed + (newTodo.completed ? 1 : 0);
+
       return {
         ...prevGoal,
+        status:
+          newTasksCompleted === prevGoal.tasks.total + 1
+            ? "Completed"
+            : "Active",
         tasks: {
           ...prevGoal.tasks,
           total: prevGoal.tasks.total + 1,
+          completed: newTasksCompleted,
         },
         todos: [...prevGoal.todos, newTodo],
       };
@@ -573,6 +597,14 @@ const CreateDialog = ({
 
             {editedGoal.todos.map((todo) => (
               <div key={todo.id} className="flex items-center gap-4 my-2">
+                <Checkbox
+                  id={`todo-${todo.id}`}
+                  checked={todo.completed}
+                  onChange={(e) =>
+                    handleTodoChange(todo.id, "completed", e.target.checked)
+                  }
+                  className="w-5 h-5"
+                />
                 <div className="relative w-full">
                   <Input
                     value={todo.description}

@@ -65,7 +65,7 @@ export const ReportChat = () => {
     const userInputs = getUserInputs();
     // You can perform further actions with the chat data here
     // For example, use the AI context function
-    const answer = await AI(userInputs, category);
+    const answer = await AI(userInputs, "medical");
 
     // Update the latest arrayChat object with the answer
     setArrayChat((prevArrayChat) => [

@@ -1,41 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
-export const Navbar = ({ myDid, createAcc, info }) => {
-  const [pic, setPic] = useState();
-
-  function getImageUrl(base64Image) {
-    if (!base64Image) {
-      // Return a default or random URL if base64Image is not available
-      // For example, you can replace the following line with your own logic
-      return "https://example.com/default-image.jpg";
-    }
-
-    // Decode base64 to binary
-    const binaryString = atob(base64Image);
-
-    // Convert binary string to Uint8Array
-    const binaryData = new Uint8Array(binaryString.length);
-    for (let i = 0; i < binaryString.length; i++) {
-      binaryData[i] = binaryString.charCodeAt(i);
-    }
-
-    // Create a Blob from the binary data
-    const blob = new Blob([binaryData], { type: "image/png" }); // Change the type accordingly
-
-    // Create an object URL for the Blob
-    const imageUrl = URL.createObjectURL(blob);
-
-    return imageUrl;
-  }
-
-  useEffect(() => {
-    // Example usage:
-    const base64Image = info ? info.image : null; // Replace with your actual data
-    const imageUrl = getImageUrl(base64Image);
-    setPic(imageUrl);
-    console.log(imageUrl);
-  }, [info]);
+export const Navbar = ({ myDid, createAcc }) => {
+  
 
   return (
     <nav className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
@@ -59,18 +26,6 @@ export const Navbar = ({ myDid, createAcc, info }) => {
             {myDid ? myDid : "Sign In"}
           </button>
 
-          <Link href="/profile">
-            <img
-              src={
-                pic
-                  ? pic
-                  : "https://t4.ftcdn.net/jpg/02/54/69/21/360_F_254692100_GdSqB6F8TkOUzpZrzxYu0xzAKit3jokp.jpg"
-              }
-              alt="Profile"
-              className="w-8 h-8 rounded-full self-center ml-3 cursor-pointer"
-              onClick={""}
-            />
-          </Link>
         </div>
         <div
           className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
