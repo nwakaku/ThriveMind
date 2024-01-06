@@ -1,7 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
-import badge from "/public/assets/badge.png";
 import {
   Tooltip,
   TooltipContent,
@@ -75,7 +73,7 @@ export const CoachingMenu = () => {
         <p className="text-gray-400 font-bold text-2xl">
           Top coaches in the community
         </p>
-        <Image src={badge} className="w-8 h-8 mt-1" />
+        <img src='https://i.ibb.co/BtC2Gk9/badge.png' className="w-8 h-8 mt-1" />
       </div>
       <p class="text-center text-gray-500 font-semibold text-sm mb-8 max-w-2xl">
         Access professional guidance and support across various disciplines at

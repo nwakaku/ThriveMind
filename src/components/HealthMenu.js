@@ -1,26 +1,16 @@
 import React, { useState } from "react";
-import Image from "next/image";
 import { Button } from "./ui/button";
 import { Records } from "./Records";
 import { FindDoctors } from "./FindDoctors";
 import { AIAnalyser } from "./AIAnalyser";
 import { PostVisit } from "./PostVisit";
-import record from "/public/assets/Records.png";
-import search from "/public/assets/Search2.png";
-import Ai from '/public/assets/AIAnalyser.png';
-import visit from '/public/assets/visit.png'
 import { Input } from "./ui/input";
-import { useWeb5 } from "@/app/web5Context";
-
 
 
 export const Health = () => {
   const [activeComponent, setActiveComponent] = useState("records");
   const [file, setFile] = useState();
   const [fileStructure, setFileStructure] = useState();
-
-    const { AIHealth } = useWeb5();
-
 
 
   function handleChange(event) {
@@ -32,7 +22,6 @@ export const Health = () => {
 
     console.log("Selected file:", file); // Log the selected file
 
-    AIHealth(file);
   }
 
   console.log(fileStructure);
@@ -42,22 +31,22 @@ export const Health = () => {
   const componentHeaderInfo = {
     records: {
       title: "Medical Records",
-      image: record,
+      img: 'https://i.ibb.co/rdLTq82/Records.png',
       buttonText: "Import Your Records",
     },
     postVisit: {
       title: "Post Visits",
-      image: visit, // Replace with the correct image for post visits
+      img: 'https://i.ibb.co/m5tLrgj/visit.png', // Replace with the correct img for post visits
       buttonText: "Schedule appointment",
     },
     aiAnalyser: {
       title: "AI Report Analyser.",
-      image: Ai, // Replace with the correct image for AI Analyser
+      img: 'https://i.ibb.co/BKMb9Ym/AIAnalyser.png', // Replace with the correct img for AI Analyser
       buttonText: "Upload Report",
     },
     findDoctors: {
       title: "Find Doctors and Centres",
-      image: search, // Replace with the correct image for Find Doctors
+      img: 'https://i.ibb.co/ZcSPJvS/Search2.png', // Replace with the correct img for Find Doctors
       buttonText: "Search",
     },
   };
@@ -77,14 +66,14 @@ export const Health = () => {
     }
   };
 
-  const { title, image, buttonText } = componentHeaderInfo[activeComponent];
+  const { title, img, buttonText } = componentHeaderInfo[activeComponent];
 
   return (
     <div class="h-screen pb-16 antialiased text-gray-800">
       {/* Top header */}
       <div className="flex justify-between items-center mr-7 my-3">
         <div className="flex space-x-2 items-center">
-          <Image src={image} className="w-8 h-8" />
+          <img src={img} className="w-8 h-8" />
           <p className="text-2xl font-bold ml-3 text-gray-200">{title}</p>
         </div>
         <div>
@@ -105,26 +94,32 @@ export const Health = () => {
         <div class="flex flex-col py-4 px-3 w-36 justify-around bg-white flex-shrink-0 my-6 rounded-xl">
           <button
             className="mx-auto hover:bg-gray-100 p-3 rounded-xl"
-            onClick={() => setActiveComponent("records")}>
-            <Image src={record} className="w-16 h-16 mx-auto" />
+
+            onClick={() => setActiveComponent("records")}
+          >
+            <img src={componentHeaderInfo.records.img} className="w-16 h-16 mx-auto" />
             <p className="text-lg text-gray-900 font-bold mt-1">Records</p>
           </button>
           <button
             className="mx-auto hover:bg-gray-100 p-3 rounded-xl"
-            onClick={() => setActiveComponent("postVisit")}>
-            <Image src={visit} className="w-16 h-16 mx-auto" />
+            onClick={() => setActiveComponent("postVisit")}
+          >
+            <img src={componentHeaderInfo.postVisit.img} className="w-16 h-16 mx-auto" />
             <p className="text-lg  text-gray-900 font-bold mt-1">Checkups</p>
           </button>
           <button
             className="mx-auto hover:bg-gray-100 p-3 rounded-xl"
-            onClick={() => setActiveComponent("aiAnalyser")}>
-            <Image src={Ai} className="w-16 h-16 mx-auto" />
+
+            onClick={() => setActiveComponent("aiAnalyser")}
+          >
+            <img src={componentHeaderInfo.aiAnalyser.img} className="w-16 h-16 mx-auto" />
             <p className="text-lg  text-gray-900 font-bold mt-1">AI Doc.</p>
           </button>
           <button
             className="mx-auto hover:bg-gray-100 p-3 rounded-xl"
-            onClick={() => setActiveComponent("findDoctors")}>
-            <Image src={search} className="w-16 h-16 mx-auto" />
+            onClick={() => setActiveComponent("findDoctors")}
+          >
+            <img src={componentHeaderInfo.findDoctors.img} className="w-16 h-16 mx-auto" />
             <p className="text-lg text-gray-900 font-bold mt-1">Search</p>
           </button>
         </div>

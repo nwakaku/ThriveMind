@@ -1,8 +1,5 @@
 import React from "react";
-import Image from "next/image";
 import { Input } from "./ui/input";
-import search from "/public/assets/search1.png";
-import visit from '/public/assets/search2.png'
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
 
@@ -10,7 +7,7 @@ export const FindDoctors = () => {
   return (
     <div className="flex flex-col items-center justify-center text-gray-900 p-12">
       <div>
-        <Image src={visit} className="w-20 h-20 mx-auto" />
+        <img src='https://i.ibb.co/ZcSPJvS/Search2.png' className="w-20 h-20 mx-auto" />
         <p className="mt-5 font-bold text-lg ">
           Find Doctors and medical centres around your environment{" "}
         </p>
