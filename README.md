@@ -20,13 +20,13 @@ TriveMind is more than an app; it's a response to the struggles many face daily 
 TriveMind seeks to empower individuals making their desire for personal wellness a reality instead of mere aspirations. By converging proven therapeutic techniques with cutting-edge technology, we're creating a space for users to live healthier, happier and more fulfilled lives.
 
 ### Features
-1. AI Coaching
+1. AI Coaching:
 Receive personalized counseling on various subjects, including relationships, mental health, academics, marriage, and more. Our AI coaches provide tailored guidance to help you navigate life's challenges.
-2. Goal Tracker
+2. Goal Tracker:
 Set, track, and achieve your goals with our intuitive goal tracking feature. Whether you're aiming for fitness milestones, academic achievements, or personal development, WellnessHub keeps you on the path to success.
-3. Journal
+3. Journal:
 Express your thoughts and emotions in a secure and private space. The journaling feature allows you to reflect on your day, set intentions, and track your emotional well-being over time.
-4. Health Pro
+4. Health Pro:
 Monitor your medical conditions and consult with AI doctors based on your medical reports. WellnessHub offers a seamless and convenient way to manage your health, ensuring you have the support you need.
 
 ### Technology Stack
