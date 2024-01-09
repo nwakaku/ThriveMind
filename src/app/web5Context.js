@@ -1,7 +1,7 @@
 // Web5Context.js
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
-import { Web5 } from "@web5/api/browser";
+// import { Web5 } from "@web5/api/browser";
 // import axios from "axios";
 
 const Web5Context = createContext();
@@ -52,6 +52,8 @@ export const Web5Provider = ({ children }) => {
   // console.log(journal);
 
   const queryForProtocol = async () => {
+    const { Web5 } = await import("@web5/api/browser");
+
     const { web5 } = await Web5.connect();
 
     //Query records with plain text data format
@@ -68,6 +70,8 @@ export const Web5Provider = ({ children }) => {
   };
 
   const queryForJournal = async () => {
+    const { Web5 } = await import("@web5/api/browser");
+
     try {
       const { web5 } = await Web5.connect();
 
@@ -96,6 +100,8 @@ export const Web5Provider = ({ children }) => {
 
   //query for goals
   const queryForGoal = async () => {
+    const { Web5 } = await import("@web5/api/browser");
+
     try {
       const { web5 } = await Web5.connect();
 
@@ -124,6 +130,8 @@ export const Web5Provider = ({ children }) => {
 
   // Update Goals
   const updateGoals = async (dataFile) => {
+    const { Web5 } = await import("@web5/api/browser");
+
     try {
       const { web5 } = await Web5.connect();
 
@@ -179,6 +187,8 @@ export const Web5Provider = ({ children }) => {
 
   const createAcc = () => {
     const initWeb5 = async () => {
+      const { Web5 } = await import("@web5/api/browser");
+
       const { web5, did } = await Web5.connect();
       // console.log(web5);
 
@@ -206,6 +216,8 @@ export const Web5Provider = ({ children }) => {
   };
 
   const writeToDwn = async (ding) => {
+    const { Web5 } = await import("@web5/api/browser");
+
     const { web5 } = await Web5.connect();
     const { record } = await web5.dwn.records.create({
       data: ding,
@@ -231,6 +243,8 @@ export const Web5Provider = ({ children }) => {
 
   // Create a Profile record
   async function createProfile(username, imageFile) {
+    const { Web5 } = await import("@web5/api/browser");
+
     const { web5 } = await Web5.connect();
 
     let base64Image = null;
@@ -263,6 +277,8 @@ export const Web5Provider = ({ children }) => {
   }
 
   async function createGoal(goals) {
+    const { Web5 } = await import("@web5/api/browser");
+
     const { web5 } = await Web5.connect();
 
     const messageData = goals;
