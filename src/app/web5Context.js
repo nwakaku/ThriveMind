@@ -1,7 +1,7 @@
 // Web5Context.js
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
-import { Web5 } from "@web5/api";
+import { Web5 } from "@web5/api/browser";
 // import axios from "axios";
 
 const Web5Context = createContext();
