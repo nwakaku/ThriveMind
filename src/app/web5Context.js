@@ -342,8 +342,7 @@ export const Web5Provider = ({ children }) => {
 
   async function AI(userInputs, category) {
     console.log(category);
-    const apiKey = openAIKey;
-    if (!apiKey) {
+    if (!process.env.NEXT_PUBLIC_OPENAI_KEY) {
       throw new Error("API key not found in environment variables.");
     }
 
@@ -365,7 +364,7 @@ export const Web5Provider = ({ children }) => {
         },
         {
           role: "user",
-          content: `state: ${userInputs[0].user} and my question: ${userInputs[1].user} ?`,
+          content: `mood: ${userInputs[0].user} and my question: ${userInputs[1].user} , and also ${userInputs[2].user}?`,
         },
       ],
       max_tokens: 200,
@@ -379,7 +378,7 @@ export const Web5Provider = ({ children }) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${apiKey}`,
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_OPENAI_KEY}`,
         },
         body: JSON.stringify(payload),
       });
@@ -398,8 +397,8 @@ export const Web5Provider = ({ children }) => {
   // this where the AI function is written
 
   async function AIHealth(userInputs) {
-    const apiKey = openAIKey;
-    if (!apiKey) {
+    // const apiKey = openAIKey;
+    if (!process.env.NEXT_PUBLIC_OPENAI_KEY) {
       throw new Error("API key not found in environment variables.");
     }
 
@@ -435,7 +434,7 @@ export const Web5Provider = ({ children }) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${apiKey}`,
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_OPENAI_KEY}`,
         },
         body: JSON.stringify(payload),
       });
