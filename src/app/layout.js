@@ -1,9 +1,9 @@
-import { Inter } from "next/font/google";
+import { Nunito } from "next/font/google";
 import "./globals.css";
 import { Web5Provider } from "./web5Context";
 
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Nunito({ subsets: ["vietnamese"] });
 
 export const metadata = {
   title: "Create Next App",

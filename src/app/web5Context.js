@@ -24,15 +24,7 @@ export const Web5Provider = ({ children }) => {
     category: "",
   });
 
-  //
-  // // Function to set the state
-  // const updateCategory = (newDescription, newImageUrl, newCategory) => {
-  //   setCategory({
-  //     description: newDescription,
-  //     imageUrl: newImageUrl,
-  //     category: newCategory,
-  //   });
-  // };
+  const openAIKey = process.env.NEXT_PUBLIC_OPENAI_KEY;
 
   const createProtocolDefinition = () => {
     const thrivemindProtocolDefinition = {
@@ -334,7 +326,7 @@ export const Web5Provider = ({ children }) => {
 
   async function AI(userInputs, category) {
     console.log(category);
-    const apiKey = "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";
+    const apiKey = openAIKey;
     if (!apiKey) {
       throw new Error("API key not found in environment variables.");
     }
@@ -357,7 +349,7 @@ export const Web5Provider = ({ children }) => {
         },
         {
           role: "user",
-          content: `mood: ${userInputs[0].user} and my question: ${userInputs[1].user} and lastly: ${userInputs[2].user} ?`,
+          content: `state: ${userInputs[0].user} and my question: ${userInputs[1].user} ?`,
         },
       ],
       max_tokens: 200,
@@ -390,7 +382,7 @@ export const Web5Provider = ({ children }) => {
   // this where the AI function is written
 
   async function AIHealth(userInputs) {
-    const apiKey = "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";
+    const apiKey = openAIKey;
     if (!apiKey) {
       throw new Error("API key not found in environment variables.");
     }
